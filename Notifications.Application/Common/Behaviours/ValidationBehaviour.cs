@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Notifications.Application.Common.Exceptions;
 
 namespace Notifications.Application.Common.Behaviours;
 
@@ -29,7 +30,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
                 .ToList();
 
             if (failures.Any())
-                throw new ValidationException(failures);
+                throw new ValidationException_(failures);
         }
         return await next();
     }

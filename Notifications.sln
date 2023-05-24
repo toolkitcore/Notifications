@@ -11,6 +11,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.WebApi", "Notifications.WebApi\Notifications.WebApi.csproj", "{E2C722D6-9330-4B8B-A22D-973016FD7C9B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Request", "Request", "{58BC8544-6FDF-42CC-865C-08790E397543}"
+	ProjectSection(SolutionItems) = preProject
+		Request\get-users.http = Request\get-users.http
+		Request\user-sign-up.http = Request\user-sign-up.http
+		Request\create-apps.http = Request\create-apps.http
+		Request\get-apps.http = Request\get-apps.http
+		Request\update-apps.http = Request\update-apps.http
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB896187-4DF3-41D6-8FC9-12636D6AFB91}"
 	ProjectSection(SolutionItems) = preProject

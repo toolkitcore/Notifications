@@ -1,0 +1,7 @@
+POST http://localhost:5000/api/apps
+Content-Type: application/json
+
+{
+  "code": "6",
+  "name": "App3"
+}

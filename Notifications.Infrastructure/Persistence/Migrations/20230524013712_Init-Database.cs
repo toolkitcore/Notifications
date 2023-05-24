@@ -51,14 +51,14 @@ namespace Notifications.Infrastructure.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Code = table.Column<string>(type: "character varying(50)", unicode: false, maxLength: 50, nullable: false),
                     UserName = table.Column<string>(type: "character varying(50)", unicode: false, maxLength: 50, nullable: false),
-                    FullName = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
-                    Email = table.Column<string>(type: "character varying(250)", unicode: false, maxLength: 250, nullable: false),
+                    FullName = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true),
+                    Email = table.Column<string>(type: "character varying(250)", unicode: false, maxLength: 250, nullable: true),
                     CountryCode = table.Column<string>(type: "character varying(50)", unicode: false, maxLength: 50, nullable: false),
                     Gender = table.Column<int>(type: "integer", nullable: true),
                     AccountType = table.Column<int>(type: "integer", nullable: true),
                     SubscriptionType = table.Column<int>(type: "integer", nullable: true),
-                    AvatarUrl = table.Column<string>(type: "character varying(250)", unicode: false, maxLength: 250, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "character varying(50)", unicode: false, maxLength: 50, nullable: false)
+                    AvatarUrl = table.Column<string>(type: "character varying(250)", unicode: false, maxLength: 250, nullable: true),
+                    PhoneNumber = table.Column<string>(type: "character varying(50)", unicode: false, maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {

@@ -59,6 +59,21 @@ public class ApplicationDbContextSeed
                 }
             );
         }
+
+        if (!_context.Users.Any())
+        {
+            await _context.Users.AddRangeAsync(
+                new List<User>()
+                {
+                    new User() { Code = "1", UserName = "dochihung1", FullName = "Đỗ Chí Hùng 1", CountryCode = "100" },
+                    new User() { Code = "2", UserName = "dochihung2", FullName = "Đỗ Chí Hùng 2", CountryCode = "100" },
+                    new User() { Code = "3", UserName = "dochihung3", FullName = "Đỗ Chí Hùng 3", CountryCode = "100" },
+                    new User() { Code = "4", UserName = "dochihung4", FullName = "Đỗ Chí Hùng 4", CountryCode = "100" },
+                    new User() { Code = "5", UserName = "dochihung5", FullName = "Đỗ Chí Hùng 5", CountryCode = "100" }
+                    
+                }
+            );
+        }
     }
 
     public async Task<IEnumerable<App>> GetAllAsync()

@@ -1,6 +1,6 @@
 ﻿namespace Notifications.Application.Common.Exceptions;
 
-public class NotFoundException : Exception
+public class NotFoundException : ApplicationException
 {
     public NotFoundException()
         : base()

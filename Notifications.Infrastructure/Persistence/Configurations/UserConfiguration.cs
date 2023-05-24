@@ -16,15 +16,19 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         
         builder.Property(u => u.UserName).HasMaxLength(50).IsUnicode(false).IsRequired();
         
-        builder.Property(u => u.FullName).HasMaxLength(250);
+        builder.Property(u => u.FullName).HasMaxLength(250).IsRequired(false);
         
-        builder.Property(u => u.Email).HasMaxLength(250).IsUnicode(false);
+        builder.Property(u => u.Email).HasMaxLength(250).IsUnicode(false).IsRequired(false);
         
         builder.Property(u => u.CountryCode).HasMaxLength(50).IsUnicode(false).IsRequired();
+
+        builder.Property(u => u.Gender).IsRequired(false);
         
-        builder.Property(u => u.AvatarUrl).HasMaxLength(250).IsUnicode(false);
+        builder.Property(u => u.AccountType).IsRequired(false);
+
+        builder.Property(u => u.AvatarUrl).HasMaxLength(250).IsUnicode(false).IsRequired(false);
         
-        builder.Property(u => u.PhoneNumber).HasMaxLength(50).IsUnicode(false);
+        builder.Property(u => u.PhoneNumber).HasMaxLength(50).IsUnicode(false).IsRequired(false);
         
         builder.HasOne(u => u.UserFirebaseToken)
             .WithOne(t => t.User)

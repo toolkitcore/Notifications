@@ -3,11 +3,11 @@ using AutoMapper;
 
 namespace Notifications.Application.Common.Mappings;
 
-public class MappingProfile
+public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        
+        ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
     }
 
     private void ApplyMappingsFromAssembly(Assembly assembly)

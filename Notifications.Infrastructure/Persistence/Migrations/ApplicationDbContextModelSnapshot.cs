@@ -326,7 +326,6 @@ namespace Notifications.Infrastructure.Persistence.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("AvatarUrl")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("character varying(250)");
@@ -344,13 +343,11 @@ namespace Notifications.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("character varying(250)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
@@ -358,7 +355,6 @@ namespace Notifications.Infrastructure.Persistence.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("character varying(50)");
