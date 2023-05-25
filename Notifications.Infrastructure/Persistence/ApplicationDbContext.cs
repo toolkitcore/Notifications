@@ -1,14 +1,19 @@
 ﻿using System.Reflection;
+using Duende.IdentityServer.EntityFramework.Options;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Notifications.Application.Common.Interfaces;
 using Notifications.Domain.Abstractions.Common.Interfaces;
 using Notifications.Domain.Entities;
 
 namespace Notifications.Infrastructure.Persistence;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : ApiAuthorizationDbContext<User>, IApplicationDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,  
+        IOptions<OperationalStoreOptions> operationalStoreOptions) 
+        : base(options, operationalStoreOptions)
     {
         
     }

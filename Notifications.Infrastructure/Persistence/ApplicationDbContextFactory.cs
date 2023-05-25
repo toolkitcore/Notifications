@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Duende.IdentityServer.EntityFramework.Options;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Options;
 
 namespace Notifications.Infrastructure.Persistence;
 
@@ -15,9 +17,11 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
                     opts.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds); 
                 }
                 );
+        
+        var operationalStoreOptions = new OperationalStoreOptions(); // Tạo một instance mới của OperationalStoreOptions
 
-        var context = new ApplicationDbContext(optionsBuilder.Options);
-
+        var context = new ApplicationDbContext(optionsBuilder.Options, Options.Create(operationalStoreOptions));
+        
         return context;
     }
 }

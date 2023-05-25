@@ -51,11 +51,7 @@ public class ApplicationDbContextSeed
             await _context.Apps.AddRangeAsync(
                 new List<App>()
                 {
-                    new App() {Code = "1", Name = "App1"},
-                    new App() {Code = "2", Name = "App2"},
-                    new App() {Code = "3", Name = "App3"},
-                    new App() {Code = "4", Name = "App4"},
-                    new App() {Code = "5", Name = "App5"},
+                    new App() {Code = "1", Name = "App"}
                 }
             );
         }

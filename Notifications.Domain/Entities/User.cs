@@ -1,12 +1,12 @@
-﻿namespace Notifications.Domain.Entities;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class User
+namespace Notifications.Domain.Entities;
+
+public class  User : IdentityUser
 {
-    public Guid Id { get; set; }
     public string Code { get; set; }
     public string UserName { get; set; }
     public string FullName { get; set; }
-    public string Email { get; set; }
     public string CountryCode { get; set; }
     public int? Gender { get; set; }
     public int? AccountType { get; set; }

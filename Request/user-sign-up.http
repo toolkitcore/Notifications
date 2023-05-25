@@ -2,7 +2,7 @@ POST http://localhost:5000/api/users/sign-up
 Content-Type: application/json
 
 {
-  "userName": "",
+  "userName": "dochihung10",
   "code": "Code",
   "countryCode": "100"
 }

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using ZymLabs.NSwag.FluentValidation;
+using OpenApiSecurityScheme = Microsoft.OpenApi.Models.OpenApiSecurityScheme;
 
 namespace Notifications.WebApi;
 
@@ -22,7 +25,7 @@ public static class ConfigureServices
         // Customise default API behaviour
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
-        
+
         return services;
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Notifications.Application.Common.Exceptions;
 using Notifications.Application.Common.Interfaces;
-using Notifications.Application.Common.Models.Users;
+using Notifications.Application.Users.Models;
 using Notifications.Domain.Entities;
 
 namespace Notifications.Application.Users.Commands.SignIn;
@@ -35,11 +35,11 @@ public class SignUpCommandHandler : IRequestHandler<SignInCommand, Authenticatio
         if (user is  null)
             throw new NotFoundException(nameof(User), request.UserName);
         
-        if(user.Code == request.Code)
+        if(user.Code != request.Code)
             throw new NotFoundException(nameof(User), request.Code);
 
         // 3. Create JWT token
-        var token = _jwtTokenGenerator.Generate(user);
+        var token = await _jwtTokenGenerator.Generate(user);
 
         return new AuthenticationResult(user, token);
     }

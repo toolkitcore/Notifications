@@ -7,7 +7,7 @@ public class NotificationTypeUser
     public int Channel { get; set; }
     public int Enabled { get; set; }
     public Guid? WorkspaceId { get; set; }
-    public Guid UserId { get; set; }
+    public string UserId { get; set; }
     
     #region [REFERENCE PROPERTIES]
     public virtual NotificationType NotificationType { get; set; }

@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Notifications.Application.Common.Exceptions;
 using Notifications.Application.Common.Interfaces;
-using Notifications.Application.Common.Models.Users;
+using Notifications.Application.Users.Models;
 using Notifications.Domain.Entities;
 
 namespace Notifications.Application.Users.Commands.SignUp;
@@ -18,11 +19,15 @@ public class SignUpCommandHandler : IRequestHandler<SignUpCommand, Authenticatio
 {
     private readonly IApplicationDbContext _context;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
+    private readonly UserManager<User> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public SignUpCommandHandler(IApplicationDbContext context, IJwtTokenGenerator jwtTokenGenerator)
+    public SignUpCommandHandler(IApplicationDbContext context, IJwtTokenGenerator jwtTokenGenerator, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _jwtTokenGenerator = jwtTokenGenerator ?? throw new ArgumentNullException(nameof(jwtTokenGenerator));
+        _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+        _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
     }
     
 
@@ -42,12 +47,13 @@ public class SignUpCommandHandler : IRequestHandler<SignUpCommand, Authenticatio
             Code = request.Code,
             CountryCode = request.CountryCode
         };
-
         await _context.Users.AddAsync(user, cancellationToken).ConfigureAwait(false);
+        // await _roleManager.CreateAsync(new IdentityRole() { Name = "Admin" });
+        await _userManager.AddToRoleAsync(user, "Admin");
         await _context.SaveChangesAsync(cancellationToken);
         
         // 3. Create JWT token
-        var token = _jwtTokenGenerator.Generate(user);
+        var token = await _jwtTokenGenerator.Generate(user);
 
         return new AuthenticationResult(user, token);
     }

@@ -12,11 +12,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.WebApi", "Not
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Request", "Request", "{58BC8544-6FDF-42CC-865C-08790E397543}"
 	ProjectSection(SolutionItems) = preProject
-		Request\get-users.http = Request\get-users.http
 		Request\user-sign-up.http = Request\user-sign-up.http
-		Request\create-apps.http = Request\create-apps.http
-		Request\get-apps.http = Request\get-apps.http
-		Request\update-apps.http = Request\update-apps.http
+		Request\text = Request\text
+		Request\user-sign-in.http = Request\user-sign-in.http
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB896187-4DF3-41D6-8FC9-12636D6AFB91}"
@@ -26,13 +24,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{AA4FB263-9C29-4CF5-9379-0102CE4D9666}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "BuildingBlocks\Contracts\Contracts.csproj", "{E95B19AF-30F3-43B1-A4A5-9F3CCB0E8E5A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "BuildingBlocks\Shared\Shared.csproj", "{1A5A889D-D061-4833-933B-19A21A537C09}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logging", "BuildingBlocks\Common.Logging\Common.Logging.csproj", "{03578FC1-5BC1-446D-9CD8-06DD1F851F16}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationGroups", "NotificationGroups", "{D9B36327-8B1A-4ED7-B19C-496AA9CA8157}"
+	ProjectSection(SolutionItems) = preProject
+		Request\NotificationGroups\create.http = Request\NotificationGroups\create.http
+		Request\NotificationGroups\update.http = Request\NotificationGroups\update.http
+		Request\NotificationGroups\delete.http = Request\NotificationGroups\delete.http
+		Request\NotificationGroups\get-all.http = Request\NotificationGroups\get-all.http
+		Request\NotificationGroups\get.http = Request\NotificationGroups\get.http
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,22 +55,8 @@ Global
 		{E2C722D6-9330-4B8B-A22D-973016FD7C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2C722D6-9330-4B8B-A22D-973016FD7C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2C722D6-9330-4B8B-A22D-973016FD7C9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E95B19AF-30F3-43B1-A4A5-9F3CCB0E8E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E95B19AF-30F3-43B1-A4A5-9F3CCB0E8E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E95B19AF-30F3-43B1-A4A5-9F3CCB0E8E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E95B19AF-30F3-43B1-A4A5-9F3CCB0E8E5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A5A889D-D061-4833-933B-19A21A537C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A5A889D-D061-4833-933B-19A21A537C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A5A889D-D061-4833-933B-19A21A537C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A5A889D-D061-4833-933B-19A21A537C09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03578FC1-5BC1-446D-9CD8-06DD1F851F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03578FC1-5BC1-446D-9CD8-06DD1F851F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03578FC1-5BC1-446D-9CD8-06DD1F851F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03578FC1-5BC1-446D-9CD8-06DD1F851F16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E95B19AF-30F3-43B1-A4A5-9F3CCB0E8E5A} = {AA4FB263-9C29-4CF5-9379-0102CE4D9666}
-		{1A5A889D-D061-4833-933B-19A21A537C09} = {AA4FB263-9C29-4CF5-9379-0102CE4D9666}
-		{03578FC1-5BC1-446D-9CD8-06DD1F851F16} = {AA4FB263-9C29-4CF5-9379-0102CE4D9666}
+		{D9B36327-8B1A-4ED7-B19C-496AA9CA8157} = {58BC8544-6FDF-42CC-865C-08790E397543}
 	EndGlobalSection
 EndGlobal

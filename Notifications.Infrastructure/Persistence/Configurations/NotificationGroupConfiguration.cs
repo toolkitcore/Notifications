@@ -16,7 +16,9 @@ public class NotificationGroupConfiguration : IEntityTypeConfiguration<Notificat
 
         builder.Property(n => n.Name).HasMaxLength(250).IsRequired();
 
-        builder.Property(n => n.ParentId).IsRequired(false);
+        builder.Property(n => n.Variables).IsRequired(false);
+        
+        builder.Property(n => n.SupportedUserLevel).IsRequired(false);
         
         builder.HasOne(c => c.Parent) 
             .WithMany(c => c.Children)

@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/notification-groups
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyODBjMzhmNi01ZmFlLTRmMzMtYTkwZS1mMDU2NWFhMTM3NjYiLCJnaXZlbl9uYW1lIjoiZG9jaGlodW5nMTAiLCJqdGkiOiI3NzllZGYzZi0zZGZiLTRkZGYtYjIxYi1kNjhlZThhNjk4ODYiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE2ODUwMDMwNTYsImV4cCI6MTY4NTIxOTA1NiwiaWF0IjoxNjg1MDAzMDU2LCJpc3MiOiJ5b3UtY2FuLWNhbGwtbWUtYmVzdC15aSIsImF1ZCI6IkF1dGggZUNvbW1lcmNlIn0.cdjoI1_hWL-y5hBZNEseSWzVxW-GaHkz5Et7hDt-Ag8
+
+{
+  "code": "1",
+  "name": "Notification Group",
+  "appId": "7a4329dc-b31b-402c-a618-bc06706a2b48"
+}

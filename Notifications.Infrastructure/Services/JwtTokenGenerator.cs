@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Notifications.Application.Common.Interfaces;
 using Notifications.Domain.Configurations;
 using Notifications.Domain.Entities;
+using Notifications.Infrastructure.Identity;
 
 namespace Notifications.Infrastructure.Services;
 
@@ -13,25 +14,32 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly JwtSettings _jwtSettings;
     private readonly IDateTimeProvider _dateTimeProvider;
+    private readonly IIdentityService _identityService;
     
-    public JwtTokenGenerator(IOptions<JwtSettings> jwtSettings, IDateTimeProvider dateTimeProvider)
+    public JwtTokenGenerator(IOptions<JwtSettings> jwtSettings, IDateTimeProvider dateTimeProvider, IIdentityService identityService)
     {
         _jwtSettings = jwtSettings.Value ?? throw new ArgumentNullException(nameof(jwtSettings));
         _dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
+        _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
     }
     
-    public string Generate(User user)
+    public async Task<string> Generate(User user)
     {
+        var roles = await _identityService.GetRolesAsync(user);
         var key = Encoding.ASCII.GetBytes(_jwtSettings.Key);
 
+        var claims = new List<Claim>
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
+
+        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+        
         var securityTokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            }),
+            Subject = new ClaimsIdentity(claims),
             Issuer = _jwtSettings.Issuer,
             Audience = _jwtSettings.Audience,
             Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.ExpiredMinute),

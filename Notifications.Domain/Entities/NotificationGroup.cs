@@ -1,15 +1,16 @@
 ﻿using System.Collections;
+using Notifications.Domain.Common.Events;
 
 namespace Notifications.Domain.Entities;
 
-public class NotificationGroup
+public class NotificationGroup : IHasDomainEvent
 {
     public Guid Id { get; set; }
     public string Code { get; set; }
     public string Name { get; set; }
     public Guid? ParentId { get; set; }
-    public string[] Variables { get; set; }
-    public string[] SupportedUserLevel { get; set; }
+    public string[]? Variables { get; set; }
+    public string[]? SupportedUserLevel { get; set; }
     public Guid AppId { get; set; }
     
     #region [REFERENCE PROPERTIES]
@@ -19,4 +20,5 @@ public class NotificationGroup
     public ICollection<Notification> Notifications { get; set; }
     public ICollection<NotificationType> NotificationTypes { get; set; }
     #endregion [REFERENCE PROPERTIES]
+    public List<DomainEvent> DomainEvents { get; set; } = new List<DomainEvent>();
 }

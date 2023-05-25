@@ -9,9 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services
         .AddApplicationServices()
         .AddInfrastructureServices(builder.Configuration)
-        .AddWebApiServices();
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+        .AddWebApiServices(); ;
 }
 
 var app = builder.Build();
@@ -23,17 +21,12 @@ var app = builder.Build();
         var applicationDbContextSeed = scope.ServiceProvider.GetRequiredService<ApplicationDbContextSeed>();
         await applicationDbContextSeed.InitialiseAsync();
         await applicationDbContextSeed.SeedAsync();
-
-        var app_ = await applicationDbContextSeed.GetAllAsync();
-        var a = "";
     }
     
     app.UseHttpsRedirection();
-
+    app.UseAuthentication();
     app.UseAuthorization();
-
     app.MapControllers();
-    
 }
 
 app.Run();
