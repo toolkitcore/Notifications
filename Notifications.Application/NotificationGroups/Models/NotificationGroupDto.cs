@@ -12,4 +12,5 @@ public class NotificationGroupDto : IMapFrom<NotificationGroup>
     public string[]? Variables { get; set; }
     public string[]? SupportedUserLevel { get; set; }
     public Guid AppId { get; set; }
+    public AppDto App { get; set; }
 }

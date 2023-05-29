@@ -25,7 +25,7 @@ public class DeleteNotificationGroupCommandHandler : IRequestHandler<DeleteNotif
 
         _context.NotificationGroups.Remove(notificationGroup);
         
-        notificationGroup.DomainEvents.Add(new NotificationGroupCompletedEvent(notificationGroup));
+        // notificationGroup.DomainEvents.Add(new NotificationGroupCompletedEvent(notificationGroup));
         
         await _context.SaveChangesAsync(cancellationToken);
 

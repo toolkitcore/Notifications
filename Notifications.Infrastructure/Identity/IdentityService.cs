@@ -15,42 +15,10 @@ public class IdentityService : IIdentityService
     private readonly IAuthorizationService _authorizationService;
 
     public IdentityService(
-        UserManager<User> userManager,
-        RoleManager<IdentityRole> roleManager,
-        IUserClaimsPrincipalFactory<User> userClaimsPrincipalFactory,
-        IAuthorizationService authorizationService
-        )
+        UserManager<User> userManager
+    )
     {
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-        _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
-        _userClaimsPrincipalFactory = userClaimsPrincipalFactory ??
-                                      throw new ArgumentNullException(nameof(userClaimsPrincipalFactory));
-        _authorizationService = authorizationService ?? throw new ArgumentNullException(nameof(authorizationService));
-    }
-
-    public async Task<string> GetUserNameAsync(string userId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<bool> IsInRoleAsync(string userId, string role)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<bool> AuthorizeAsync(string userId, string policyName)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<Result> DeleteUserAsync(string userId)
-    {
-        throw new NotImplementedException();
     }
 
     public async Task<IList<string>> GetRolesAsync(User user)

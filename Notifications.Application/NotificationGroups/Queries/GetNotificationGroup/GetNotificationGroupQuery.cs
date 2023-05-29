@@ -27,6 +27,7 @@ public class GetNotificationGroupQueryHandler : IRequestHandler<GetNotificationG
     {
         var notificationGroup =
             await _context.NotificationGroups.Where(n => n.Id == request.groupId)
+                .Include(n => n.App)
                 .ProjectTo<NotificationGroupDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken)
                 .ConfigureAwait(false);

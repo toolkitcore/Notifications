@@ -58,7 +58,7 @@ public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotif
             AppId = request.AppId
         };
 
-        notificationGroupNew.DomainEvents.Add(new NotificationGroupCompletedEvent(notificationGroupNew));
+        // notificationGroupNew.DomainEvents.Add(new NotificationGroupCompletedEvent(notificationGroupNew));
         
         await _context.NotificationGroups.AddAsync(notificationGroupNew, cancellationToken).ConfigureAwait(false);
         await _context.SaveChangesAsync(cancellationToken);

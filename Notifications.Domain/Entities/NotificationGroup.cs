@@ -3,7 +3,7 @@ using Notifications.Domain.Common.Events;
 
 namespace Notifications.Domain.Entities;
 
-public class NotificationGroup : IHasDomainEvent
+public class NotificationGroup
 {
     public Guid Id { get; set; }
     public string Code { get; set; }
@@ -20,5 +20,4 @@ public class NotificationGroup : IHasDomainEvent
     public ICollection<Notification> Notifications { get; set; }
     public ICollection<NotificationType> NotificationTypes { get; set; }
     #endregion [REFERENCE PROPERTIES]
-    public List<DomainEvent> DomainEvents { get; set; } = new List<DomainEvent>();
 }
