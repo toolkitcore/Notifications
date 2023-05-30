@@ -21,10 +21,14 @@ public record CreateNotificationGroupCommand : IRequest<Guid>
 public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotificationGroupCommand, Guid>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ICacheService _cacheService;
+    private readonly IMassTransitService _massTransitService;
 
-    public CreateNotificationGroupCommandHandler(IApplicationDbContext context)
+    public CreateNotificationGroupCommandHandler(IApplicationDbContext context, ICacheService cacheService, IMassTransitService massTransitService)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
+        _massTransitService = massTransitService ?? throw new ArgumentNullException(nameof(massTransitService));
     }
     
     public async Task<Guid> Handle(CreateNotificationGroupCommand request, CancellationToken cancellationToken)
@@ -61,8 +65,13 @@ public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotif
         // notificationGroupNew.DomainEvents.Add(new NotificationGroupCompletedEvent(notificationGroupNew));
         
         await _context.NotificationGroups.AddAsync(notificationGroupNew, cancellationToken).ConfigureAwait(false);
+        
         await _context.SaveChangesAsync(cancellationToken);
-
+        
+        _cacheService.RemoveData("notification-groups");
+        
+        _massTransitService.SendMessage<NotificationGroup>(notificationGroupNew);
+        
         return notificationGroupNew.Id;
     }
 }

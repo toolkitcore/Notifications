@@ -57,9 +57,14 @@ public static class ConfigureServices
 
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
-        services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
+        
+        services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+        
         services.AddTransient<IIdentityService, IdentityService>();
-        services.AddTransient<ICurrentUserService, CurrentUserService>();
+
+        services.AddSingleton<ICacheService, CacheService>();
+        
+        services.AddSingleton<IMassTransitService, MassTransitService>();
         
         return services;
     }

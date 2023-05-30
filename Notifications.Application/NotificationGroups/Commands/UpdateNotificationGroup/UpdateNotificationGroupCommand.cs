@@ -20,13 +20,14 @@ public record UpdateNotificationGroupCommand : IRequest<Unit>
 public class UpdateNotificationGroupCommandHandler : IRequestHandler<UpdateNotificationGroupCommand>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ICacheService _cacheService;
 
-    public UpdateNotificationGroupCommandHandler(IApplicationDbContext context)
+    public UpdateNotificationGroupCommandHandler(IApplicationDbContext context, ICacheService cacheService)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
     }
-
-
+    
     public async Task<Unit> Handle(UpdateNotificationGroupCommand request, CancellationToken cancellationToken)
     {
         var notificationGroup = await _context.NotificationGroups.FindAsync(new object[] { request.Id }, cancellationToken)
@@ -65,6 +66,7 @@ public class UpdateNotificationGroupCommandHandler : IRequestHandler<UpdateNotif
 
         _context.NotificationGroups.Update(notificationGroup);
         await _context.SaveChangesAsync(cancellationToken);
+        _cacheService.RemoveData("notification-groups");
         
         return Unit.Value;
     }

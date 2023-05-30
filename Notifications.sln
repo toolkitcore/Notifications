@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationGroups", "Notif
 		Request\NotificationGroups\get.http = Request\NotificationGroups\get.http
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandleMessage", "HandleMessage\HandleMessage.csproj", "{D7855329-62A9-492B-9F30-8CF8CEC888B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{E2C722D6-9330-4B8B-A22D-973016FD7C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2C722D6-9330-4B8B-A22D-973016FD7C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2C722D6-9330-4B8B-A22D-973016FD7C9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7855329-62A9-492B-9F30-8CF8CEC888B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7855329-62A9-492B-9F30-8CF8CEC888B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7855329-62A9-492B-9F30-8CF8CEC888B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7855329-62A9-492B-9F30-8CF8CEC888B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D9B36327-8B1A-4ED7-B19C-496AA9CA8157} = {58BC8544-6FDF-42CC-865C-08790E397543}

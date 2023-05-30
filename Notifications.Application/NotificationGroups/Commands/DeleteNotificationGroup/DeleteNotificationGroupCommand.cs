@@ -11,10 +11,12 @@ public record DeleteNotificationGroupCommand(Guid groupId) : IRequest<Unit>;
 public class DeleteNotificationGroupCommandHandler : IRequestHandler<DeleteNotificationGroupCommand>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ICacheService _cacheService;
 
-    public DeleteNotificationGroupCommandHandler(IApplicationDbContext context)
+    public DeleteNotificationGroupCommandHandler(IApplicationDbContext context, ICacheService cacheService)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
     }
     
     public async Task<Unit> Handle(DeleteNotificationGroupCommand request, CancellationToken cancellationToken)
@@ -28,6 +30,7 @@ public class DeleteNotificationGroupCommandHandler : IRequestHandler<DeleteNotif
         // notificationGroup.DomainEvents.Add(new NotificationGroupCompletedEvent(notificationGroup));
         
         await _context.SaveChangesAsync(cancellationToken);
+        _cacheService.RemoveData("notification-groups");
 
         return Unit.Value;
     }
