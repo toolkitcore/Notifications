@@ -8,10 +8,12 @@ using Microsoft.IdentityModel.Tokens;
 using Notifications.Application.Common.Interfaces;
 using Notifications.Domain.Configurations;
 using Notifications.Domain.Entities;
-using Notifications.Infrastructure.Common.Extensions;
 using Notifications.Infrastructure.Identity;
 using Notifications.Infrastructure.Persistence;
+using Notifications.Infrastructure.Repositories.NotificationGroups;
 using Notifications.Infrastructure.Services;
+using Shared.Caching.Redis.Extensions;
+using Shared.Utilities;
 
 namespace Notifications.Infrastructure;
 
@@ -56,16 +58,23 @@ public static class ConfigureServices
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
-        services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
-        
+
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         
         services.AddTransient<IIdentityService, IdentityService>();
 
-        services.AddSingleton<ICacheService, CacheService>();
-        
         services.AddSingleton<IMassTransitService, MassTransitService>();
+
+        services.AddSingleton<IUserRepository, UserRedisRepository>();
+
+        services.AddRedisCaching(configuration);
         
+        return services;
+    }
+    
+    private static IServiceCollection AddRedisCache(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddRedisCaching(configuration);
         return services;
     }
 }

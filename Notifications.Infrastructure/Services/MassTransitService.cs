@@ -3,8 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Notifications.Application.Common.Interfaces;
 using Notifications.Domain.Configurations;
-using Notifications.Infrastructure.Common.Extensions;
 using RabbitMQ.Client;
+using Shared.Utilities;
 
 namespace Notifications.Infrastructure.Services;
 
@@ -25,11 +25,8 @@ public class MassTransitService : IMassTransitService
             ClientProvidedName = _massTransitSetting.ClientProvidedName
         };
         
-        //Create the RabbitMQ connection using connection factory details as i mentioned above
         using var connection = factory.CreateConnection();
-        //Here we create channel with session and model
         using var channel = connection.CreateModel();
-        //declare the queue after mentioning name and a few property related to that
         var name = typeof(T).Name;
         channel.QueueDeclare(name, durable: false, exclusive: false, autoDelete: false, arguments: null);
         var settings = new JsonSerializerSettings

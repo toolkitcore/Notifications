@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Application",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Infrastructure", "Notifications.Infrastructure\Notifications.Infrastructure.csproj", "{5D95E831-1699-4CB1-8D5B-9C3E050D8770}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{E38890CC-36BB-4ECA-85D1-0210AC5DA058}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.WebApi", "Notifications.WebApi\Notifications.WebApi.csproj", "{E2C722D6-9330-4B8B-A22D-973016FD7C9B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Request", "Request", "{58BC8544-6FDF-42CC-865C-08790E397543}"
@@ -35,6 +33,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationGroups", "Notif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandleMessage", "HandleMessage\HandleMessage.csproj", "{D7855329-62A9-492B-9F30-8CF8CEC888B5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{61FB1F9D-8831-4278-B3BB-413E940C662D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Caching", "Caching", "{BC1A99B0-2C67-4110-8C97-7061EFA8E663}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Caching.Redis", "Shared\Caching\Shared.Caching.Redis\Shared.Caching.Redis.csproj", "{CB41BEDB-EB5F-43F0-B873-DFFE74A73F93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Caching.Abstractions", "Shared\Caching\Shared.Caching.Abstractions\Shared.Caching.Abstractions.csproj", "{72D21295-51D9-430E-B1FF-3A3D2FE9647C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Caching.InMemory", "Shared\Caching\Shared.Caching.InMemory\Shared.Caching.InMemory.csproj", "{9C034AE9-3E46-4A08-BBAF-01DFEDE5075F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{8BDA971E-AFC9-48BB-AD6C-0B0390CA8EDC}"
+	ProjectSection(SolutionItems) = preProject
+		Notes\AssemblyInfo = Notes\AssemblyInfo
+		Notes\AsyncRetryPolicy = Notes\AsyncRetryPolicy
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Utilities", "Shared\Shared.Utilities\Shared.Utilities.csproj", "{F79AEB1F-19D4-4438-9A9A-CA5BAC2F09E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MultiTenancy", "MultiTenancy", "{1FE558D7-9E6C-46C9-8268-519517B2C677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.MultiTenancy.Abstractions", "Shared\Shared.MultiTenancy.Abstractions\Shared.MultiTenancy.Abstractions.csproj", "{65AF6FFA-B69E-42D6-B520-6A2C90FEEBFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,8 +81,35 @@ Global
 		{D7855329-62A9-492B-9F30-8CF8CEC888B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7855329-62A9-492B-9F30-8CF8CEC888B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7855329-62A9-492B-9F30-8CF8CEC888B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB41BEDB-EB5F-43F0-B873-DFFE74A73F93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB41BEDB-EB5F-43F0-B873-DFFE74A73F93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB41BEDB-EB5F-43F0-B873-DFFE74A73F93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB41BEDB-EB5F-43F0-B873-DFFE74A73F93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D21295-51D9-430E-B1FF-3A3D2FE9647C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D21295-51D9-430E-B1FF-3A3D2FE9647C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D21295-51D9-430E-B1FF-3A3D2FE9647C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D21295-51D9-430E-B1FF-3A3D2FE9647C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C034AE9-3E46-4A08-BBAF-01DFEDE5075F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C034AE9-3E46-4A08-BBAF-01DFEDE5075F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C034AE9-3E46-4A08-BBAF-01DFEDE5075F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C034AE9-3E46-4A08-BBAF-01DFEDE5075F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F79AEB1F-19D4-4438-9A9A-CA5BAC2F09E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F79AEB1F-19D4-4438-9A9A-CA5BAC2F09E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F79AEB1F-19D4-4438-9A9A-CA5BAC2F09E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F79AEB1F-19D4-4438-9A9A-CA5BAC2F09E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65AF6FFA-B69E-42D6-B520-6A2C90FEEBFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65AF6FFA-B69E-42D6-B520-6A2C90FEEBFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65AF6FFA-B69E-42D6-B520-6A2C90FEEBFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65AF6FFA-B69E-42D6-B520-6A2C90FEEBFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D9B36327-8B1A-4ED7-B19C-496AA9CA8157} = {58BC8544-6FDF-42CC-865C-08790E397543}
+		{BC1A99B0-2C67-4110-8C97-7061EFA8E663} = {61FB1F9D-8831-4278-B3BB-413E940C662D}
+		{CB41BEDB-EB5F-43F0-B873-DFFE74A73F93} = {BC1A99B0-2C67-4110-8C97-7061EFA8E663}
+		{72D21295-51D9-430E-B1FF-3A3D2FE9647C} = {BC1A99B0-2C67-4110-8C97-7061EFA8E663}
+		{9C034AE9-3E46-4A08-BBAF-01DFEDE5075F} = {BC1A99B0-2C67-4110-8C97-7061EFA8E663}
+		{F79AEB1F-19D4-4438-9A9A-CA5BAC2F09E3} = {61FB1F9D-8831-4278-B3BB-413E940C662D}
+		{1FE558D7-9E6C-46C9-8268-519517B2C677} = {61FB1F9D-8831-4278-B3BB-413E940C662D}
+		{65AF6FFA-B69E-42D6-B520-6A2C90FEEBFF} = {1FE558D7-9E6C-46C9-8268-519517B2C677}
 	EndGlobalSection
 EndGlobal

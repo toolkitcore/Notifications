@@ -13,13 +13,11 @@ namespace Notifications.Infrastructure.Services;
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly JwtSettings _jwtSettings;
-    private readonly IDateTimeProvider _dateTimeProvider;
     private readonly IIdentityService _identityService;
     
-    public JwtTokenGenerator(IOptions<JwtSettings> jwtSettings, IDateTimeProvider dateTimeProvider, IIdentityService identityService)
+    public JwtTokenGenerator(IOptions<JwtSettings> jwtSettings, IIdentityService identityService)
     {
         _jwtSettings = jwtSettings.Value ?? throw new ArgumentNullException(nameof(jwtSettings));
-        _dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
     }
     

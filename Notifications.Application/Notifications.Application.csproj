@@ -24,6 +24,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Notifications.Domain\Notifications.Domain.csproj" />
+      <ProjectReference Include="..\Shared\Caching\Shared.Caching.Abstractions\Shared.Caching.Abstractions.csproj" />
+      <ProjectReference Include="..\Shared\Shared.Utilities\Shared.Utilities.csproj" />
     </ItemGroup>
 
 </Project>

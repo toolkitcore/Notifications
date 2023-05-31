@@ -4,6 +4,7 @@ using Notifications.Application.Common.Exceptions;
 using Notifications.Application.Common.Interfaces;
 using Notifications.Application.Users.Models;
 using Notifications.Domain.Entities;
+using ApplicationException = Notifications.Application.Common.Exceptions.ApplicationException;
 
 namespace Notifications.Application.Users.Commands.SignIn;
 
@@ -16,29 +17,25 @@ public class SignInCommand : IRequest<AuthenticationResult>
 
 public class SignUpCommandHandler : IRequestHandler<SignInCommand, AuthenticationResult>
 {
-    private readonly IApplicationDbContext _context;
+    private readonly IUserRepository _userRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-    public SignUpCommandHandler(IApplicationDbContext context, IJwtTokenGenerator jwtTokenGenerator)
+    public SignUpCommandHandler(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
     {
-        _context = context ?? throw new ArgumentNullException(nameof(context));
+        _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         _jwtTokenGenerator = jwtTokenGenerator ?? throw new ArgumentNullException(nameof(jwtTokenGenerator));
     }
     
-
     public async Task<AuthenticationResult> Handle(SignInCommand request, CancellationToken cancellationToken)
     {
-        // 1. Validate the user doesn't exits
-        var user = await _context.Users
-            .FirstOrDefaultAsync(u => u.UserName.Contains(request.UserName), cancellationToken).ConfigureAwait(false);
+        var user = await _userRepository.GetByUserNameAsync(request.UserName, cancellationToken);
         
         if (user is  null)
-            throw new NotFoundException(nameof(User), request.UserName);
+            throw new ApplicationException(ErrorCode.UserNotFound, ErrorCode.UserNotFound);
         
         if(user.Code != request.Code)
-            throw new NotFoundException(nameof(User), request.Code);
-
-        // 3. Create JWT token
+            throw new ApplicationException(ErrorCode.UserNotFound, ErrorCode.UserNotFound);
+        
         var token = await _jwtTokenGenerator.Generate(user);
 
         return new AuthenticationResult(user, token);

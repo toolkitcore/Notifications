@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Notifications.Application.Common.Exceptions;
 
 namespace Notifications.Application.Users.Commands.SignIn;
 
@@ -8,11 +9,13 @@ public class SignInCommandValidator : AbstractValidator<SignInCommand>
     {
         RuleFor(x => x.UserName)
             .MaximumLength(50)
-            .NotEmpty();
+            .NotEmpty()
+            .WithMessage(ErrorCode.FieldIsRequired);
 
         RuleFor(x => x.Code)
             .MaximumLength(50)
-            .NotEmpty();
+            .NotEmpty()
+            .WithMessage(ErrorCode.FieldIsRequired);
 
     }
 }

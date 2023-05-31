@@ -2,6 +2,7 @@ using Notifications.Application;
 using Notifications.Infrastructure;
 using Notifications.Infrastructure.Persistence;
 using Notifications.WebApi;
+using Notifications.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,7 @@ var app = builder.Build();
         await applicationDbContextSeed.InitialiseAsync();
         await applicationDbContextSeed.SeedAsync();
     }
-    
+    app.UseMiddleware<ErrorExceptionMiddleware>();
     app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseAuthorization();

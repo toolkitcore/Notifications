@@ -9,11 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Notifications.Application\Notifications.Application.csproj" />
       <ProjectReference Include="..\Notifications.Domain\Notifications.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Helpers\" />
-      <Folder Include="Persistence\Interceptors\" />
+      <ProjectReference Include="..\Shared\Caching\Shared.Caching.Redis\Shared.Caching.Redis.csproj" />
     </ItemGroup>
 
     <ItemGroup>

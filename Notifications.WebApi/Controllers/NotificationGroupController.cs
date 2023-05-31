@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Notifications.Application.Common.Exceptions;
 using Notifications.Application.Common.Models.PaginatedList;
-using Notifications.Application.NotificationGroups.Commands.CreateNotificationGroup;
-using Notifications.Application.NotificationGroups.Commands.DeleteNotificationGroup;
-using Notifications.Application.NotificationGroups.Commands.UpdateNotificationGroup;
+using Notifications.Application.NotificationGroups.Commands.Create;
+using Notifications.Application.NotificationGroups.Commands.Delete;
+using Notifications.Application.NotificationGroups.Commands.Update;
 using Notifications.Application.NotificationGroups.Models;
-using Notifications.Application.NotificationGroups.Queries.GetNotificationGroup;
-using Notifications.Application.NotificationGroups.Queries.GetNotificationGroupsWithPaginationQuery;
+using Notifications.Application.NotificationGroups.Queries.Get;
+using Notifications.Application.NotificationGroups.Queries.GetsWithPaginationQuery;
 
 namespace Notifications.WebApi.Controllers;
 
@@ -16,7 +16,7 @@ public class NotificationGroupController : ApiControllerBase
 {
     [HttpGet]
     [Route("api/notification-groups")]
-    public async Task<ActionResult<PaginatedList<NotificationGroupDto>>> GetAllAsync([FromQuery]GetNotificationGroupsWithPaginationQuery query)
+    public async Task<ActionResult<PaginatedList<NotificationGroupDto>>> GetAllAsync([FromQuery]GetNotificationGroupsWithFilterRequestModel query)
     {
         return await Mediator.Send(query).ConfigureAwait(false);
     }
@@ -39,9 +39,6 @@ public class NotificationGroupController : ApiControllerBase
     [Route("api/notification-groups/{id:guid}")]
     public async Task<ActionResult> UpdateAsync([FromRoute(Name = "id")]Guid notificationGroupId, [FromBody]UpdateNotificationGroupCommand command)
     {
-        if (notificationGroupId != command.Id)
-            throw new BadRequestException("The request is invalid.");
-        
         await Mediator.Send(command).ConfigureAwait(false);
         return NoContent();
     }
