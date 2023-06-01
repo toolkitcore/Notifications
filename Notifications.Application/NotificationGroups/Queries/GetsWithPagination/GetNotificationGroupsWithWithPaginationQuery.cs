@@ -8,14 +8,14 @@ using Notifications.Application.Common.Models.PaginatedList;
 using Notifications.Application.NotificationGroups.Models;
 using Shared.Caching.Abstractions;
 
-namespace Notifications.Application.NotificationGroups.Queries.GetsWithPaginationQuery;
+namespace Notifications.Application.NotificationGroups.Queries.GetsWithPagination;
 
-public class GetNotificationGroupsWithFilterRequestModel : FilterRequestModel ,IRequest<PaginatedList<NotificationGroupDto>>
+public class GetNotificationGroupsWithWithPaginationQuery : FilterRequestModel ,IRequest<PaginatedList<NotificationGroupDto>>
 {
     public Guid? NotificationGroupId { get; set; }
 }
 
-public class GetNotificationGroupsWithPaginationQueryHandler : IRequestHandler<GetNotificationGroupsWithFilterRequestModel,
+public class GetNotificationGroupsWithPaginationQueryHandler : IRequestHandler<GetNotificationGroupsWithWithPaginationQuery,
     PaginatedList<NotificationGroupDto>>
 {
     private readonly IApplicationDbContext _context;
@@ -29,7 +29,7 @@ public class GetNotificationGroupsWithPaginationQueryHandler : IRequestHandler<G
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
     
-    public async Task<PaginatedList<NotificationGroupDto>> Handle(GetNotificationGroupsWithFilterRequestModel request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<NotificationGroupDto>> Handle(GetNotificationGroupsWithWithPaginationQuery request, CancellationToken cancellationToken)
     {
         // var cacheData = _cacheService.GetData<PaginatedList<NotificationGroupDto>> ("notification-groups");
         // if (cacheData is not null)
@@ -43,7 +43,7 @@ public class GetNotificationGroupsWithPaginationQueryHandler : IRequestHandler<G
             .ProjectTo<NotificationGroupDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageIndex, request.PageSize);
 
-        var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+        // var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
         // _cacheService.SetData<PaginatedList<NotificationGroupDto>> ("notification-groups", notificationGroupPaginatedList, expirationTime);
         
         return notificationGroupPaginatedList;

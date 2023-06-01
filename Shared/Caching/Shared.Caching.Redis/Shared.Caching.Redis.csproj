@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Shared.MultiTenancy.Abstractions\Shared.MultiTenancy.Abstractions.csproj" />
       <ProjectReference Include="..\..\Shared.Utilities\Shared.Utilities.csproj" />
       <ProjectReference Include="..\Shared.Caching.Abstractions\Shared.Caching.Abstractions.csproj" />
     </ItemGroup>

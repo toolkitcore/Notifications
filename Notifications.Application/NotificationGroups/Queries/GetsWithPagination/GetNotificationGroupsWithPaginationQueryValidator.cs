@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 
-namespace Notifications.Application.NotificationGroups.Queries.GetsWithPaginationQuery;
+namespace Notifications.Application.NotificationGroups.Queries.GetsWithPagination;
 
-public class GetNotificationGroupsWithPaginationQueryValidator : AbstractValidator<GetNotificationGroupsWithFilterRequestModel>
+public class GetNotificationGroupsWithPaginationQueryValidator : AbstractValidator<GetNotificationGroupsWithWithPaginationQuery>
 {
     public GetNotificationGroupsWithPaginationQueryValidator()
     {

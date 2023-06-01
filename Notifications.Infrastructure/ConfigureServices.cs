@@ -1,10 +1,7 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using Notifications.Application.Common.Interfaces;
 using Notifications.Domain.Configurations;
 using Notifications.Domain.Entities;
@@ -22,29 +19,6 @@ public static class ConfigureServices
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        var jwtSetting = configuration.GetOptions<JwtSettings>();
-        services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.RequireHttpsMetadata = false;
-                options.SaveToken = true;
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSetting.Key)),
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero,
-                    ValidIssuer = jwtSetting.Issuer,
-                    ValidAudience = jwtSetting.Audience
-                };
-            });
-        
         var databaseSetting = configuration.GetOptions<DatabaseSetting>();
         services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(databaseSetting.Default));
 
@@ -65,7 +39,7 @@ public static class ConfigureServices
 
         services.AddSingleton<IMassTransitService, MassTransitService>();
 
-        services.AddSingleton<IUserRepository, UserRedisRepository>();
+        services.AddScoped<IUserRepository, UserRedisRepository>();
 
         services.AddRedisCaching(configuration);
         

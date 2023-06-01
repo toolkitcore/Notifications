@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Notifications.Application.Common.Exceptions;
 using Notifications.Application.Common.Models.PaginatedList;
 using Notifications.Application.NotificationGroups.Commands.Create;
 using Notifications.Application.NotificationGroups.Commands.Delete;
 using Notifications.Application.NotificationGroups.Commands.Update;
 using Notifications.Application.NotificationGroups.Models;
 using Notifications.Application.NotificationGroups.Queries.Get;
-using Notifications.Application.NotificationGroups.Queries.GetsWithPaginationQuery;
+using Notifications.Application.NotificationGroups.Queries.GetsWithPagination;
 
 namespace Notifications.WebApi.Controllers;
 
@@ -16,7 +15,7 @@ public class NotificationGroupController : ApiControllerBase
 {
     [HttpGet]
     [Route("api/notification-groups")]
-    public async Task<ActionResult<PaginatedList<NotificationGroupDto>>> GetAllAsync([FromQuery]GetNotificationGroupsWithFilterRequestModel query)
+    public async Task<ActionResult<PaginatedList<NotificationGroupDto>>> GetAllAsync([FromQuery]GetNotificationGroupsWithWithPaginationQuery query)
     {
         return await Mediator.Send(query).ConfigureAwait(false);
     }

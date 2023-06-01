@@ -1,33 +1,49 @@
-using Notifications.Application;
-using Notifications.Infrastructure;
 using Notifications.Infrastructure.Persistence;
 using Notifications.WebApi;
 using Notifications.WebApi.Middlewares;
+using Serilog;
+using Shared.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-{
-    builder.Services
-        .AddApplicationServices()
-        .AddInfrastructureServices(builder.Configuration)
-        .AddWebApiServices(); ;
-}
+Log.Information("Start server Web API IChiba.Notification.");
 
-var app = builder.Build();
-
+try
 {
-    // Initialise and seed database
+    builder.Host.UseSerilog(Serilogger.Configure);
+
+    builder.Host.AddAppConfigurations();
+    
+    builder.Services.AddWebApiServices(builder.Configuration); ;
+    
+    var app = builder.Build();
+    
     using (var scope = app.Services.CreateScope())
     {
         var applicationDbContextSeed = scope.ServiceProvider.GetRequiredService<ApplicationDbContextSeed>();
         await applicationDbContextSeed.InitialiseAsync();
         await applicationDbContextSeed.SeedAsync();
     }
-    app.UseMiddleware<ErrorExceptionMiddleware>();
-    app.UseHttpsRedirection();
-    app.UseAuthentication();
-    app.UseAuthorization();
-    app.MapControllers();
-}
+    
 
-app.Run();
+    app.UseExceptionMiddleware();
+
+    app.UseHttpsRedirection();
+
+    app.UseAuthentication();
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+    
+    app.Run();
+}
+catch (Exception exception)
+{
+    Log.Fatal(exception, "Unhandled exception");
+}
+finally
+{
+    Log.Information("Shut dow web api Web API IChiba.Notification complete");
+    Log.CloseAndFlush();
+}
