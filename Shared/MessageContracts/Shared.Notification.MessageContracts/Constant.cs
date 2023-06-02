@@ -8,8 +8,7 @@ public static class Constant
     
     public static class TopicConstant
     {
-        public const string PushNotification = "ichiba_notification_push_notification_topic";
-        public const string UpdateEmailSender = "ichiba_notification_update_email_sender_topic";
+        public const string PushNotificationGroup = "ichiba_notification_push_notification_group_topic";
     }
 
     public static class ErrorCode

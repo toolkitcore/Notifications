@@ -37,9 +37,7 @@ public static class ConfigureServices
         
         services.AddTransient<IIdentityService, IdentityService>();
 
-        services.AddSingleton<IMassTransitService, MassTransitService>();
-
-        services.AddScoped<IUserRepository, UserRedisRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddRedisCaching(configuration);
         

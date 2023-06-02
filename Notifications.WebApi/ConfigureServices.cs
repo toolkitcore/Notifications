@@ -1,23 +1,24 @@
-﻿using MassTransit;
+﻿using GreenPipes;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Notifications.Application;
 using Notifications.Infrastructure;
+using Notifications.WebApi.Consumers;
 using Shared.Authorization.Extensions;
 using ZymLabs.NSwag.FluentValidation;
 using Shared.MessageBroker.RabbitMQ.Extensions;
+using Shared.Notification.MessageContracts;
+using NotificationTopic = Shared.Notification.MessageContracts.Constant;
+
 
 
 namespace Notifications.WebApi;
 
 public static class ConfigureServices
 {
-    static ConfigureServices()
-    {
-    }
-
-    public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
     {
         services.AddHttpContextAccessor();
         
@@ -39,6 +40,9 @@ public static class ConfigureServices
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
 
+        services.AddAuthentication(configuration, env);
+        services.AddMessageQueue(configuration, env);
+
         return services;
     }
 
@@ -51,13 +55,25 @@ public static class ConfigureServices
             configuration,
             (configurator, setting) =>
             {
-                configurator.SetEndpointNameFormatter(new SnakeCaseEndpointNameFormatter(setting.QueuePrefix, false));
+                configurator.AddConsumer<PushNotificationGroupConsumer>();
             },
             (context, cfg, setting) =>
             {
+                cfg.ReceiveEndpoint($"{setting.GetReceiveEndpoint(NotificationTopic.TopicConstant.PushNotificationGroup)}",
+                    endpointConfigurator =>
+                    {
+                        endpointConfigurator.Bind($"{NotificationTopic.TopicConstant.PushNotificationGroup}");
+                        endpointConfigurator.Bind<PushNotificationGroupMessage>();
+                        endpointConfigurator.UseRetry(r => r.Interval(3, TimeSpan.FromSeconds(3)));
+                        endpointConfigurator.UseRateLimit(5);
+                        endpointConfigurator.ConfigureConsumer<PushNotificationGroupConsumer>(context);
+                    });
+                
+                cfg.ConfigureEndpoints(context);
                 
             }
         );
+        services.AddMassTransitHostedService();
         return services;
     }
 
@@ -67,7 +83,7 @@ public static class ConfigureServices
         IWebHostEnvironment env
         )
     {
-        services.AddJwtBearer(configuration);
+        services.AddJwtBearer(configuration, null);
         services.AddAuthorization(options =>
         {
             var defaultAuthorizationPolicyBuilder =

@@ -17,13 +17,15 @@ public record SignUpCommand : IRequest<AuthenticationResult>
 
 public class SignUpCommandHandler : IRequestHandler<SignUpCommand, AuthenticationResult>
 {
+    private readonly IApplicationDbContext _context;
     private readonly IUserRepository _userRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public SignUpCommandHandler(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+    public SignUpCommandHandler(IApplicationDbContext context, IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
     {
+        _context = context ?? throw new ArgumentNullException(nameof(context));
         _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         _jwtTokenGenerator = jwtTokenGenerator ?? throw new ArgumentNullException(nameof(jwtTokenGenerator));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
@@ -38,19 +40,19 @@ public class SignUpCommandHandler : IRequestHandler<SignUpCommand, Authenticatio
         if (userExist is not null)
             throw new BadRequestException("User with given UserName already exists.");
         
-        var userNew = new User()
+        var user = new User()
         {
             UserName = request.UserName,
             Code = request.Code,
             CountryCode = request.CountryCode
         };
         
-        // await _context.Users.AddAsync(user, cancellationToken).ConfigureAwait(false);
-        // await _roleManager.CreateAsync(new IdentityRole() { Name = "Admin" });
-        // await _userManager.AddToRoleAsync(user, "Admin");
-        // await _context.SaveChangesAsync(cancellationToken);
+        await _context.Users.AddAsync(user, cancellationToken).ConfigureAwait(false);
+        await _roleManager.CreateAsync(new IdentityRole() { Name = "Admin" });
+        await _userManager.AddToRoleAsync(user, "Admin");
+        await _context.SaveChangesAsync(cancellationToken);
 
-        var user = await _userRepository.CreateAsync(userNew, cancellationToken);
+        // var user = await _userRepository.CreateAsync(userNew, cancellationToken);
         
         var token = await _jwtTokenGenerator.Generate(user);
 

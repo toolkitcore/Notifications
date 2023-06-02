@@ -6,7 +6,7 @@ public static class MessageQueueSettingExtensions
     {
         var virHost = setting.VirtualHost.Trim().TrimStart('/').TrimEnd('/');
         virHost = string.IsNullOrWhiteSpace(virHost) ? virHost : $"/{virHost}";
-        return $"rabbitmq://{setting.VirtualHost}:{setting.Port}{virHost}/{endpoint}";
+        return $"rabbitmq://{setting.Host}:{setting.Port}{virHost}/{endpoint}";
     }
 
     public static string GetPublishEndpointError(this MessageQueueSetting setting, string endpoint)

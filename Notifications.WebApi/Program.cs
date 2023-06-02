@@ -14,7 +14,7 @@ try
 
     builder.Host.AddAppConfigurations();
     
-    builder.Services.AddWebApiServices(builder.Configuration); ;
+    builder.Services.AddWebApiServices(builder.Configuration, builder.Environment); ;
     
     var app = builder.Build();
     
