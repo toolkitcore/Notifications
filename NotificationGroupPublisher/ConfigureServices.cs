@@ -30,7 +30,6 @@ public static class ConfigureServices
     public static IServiceCollection AddMessageQueue(this IServiceCollection services, IConfiguration configuration,
         IWebHostEnvironment env)
     {
-
         services.AddMasstransitRabbitMqMessagePublisher(
             configuration,
             (configurator, setting) =>
@@ -42,7 +41,6 @@ public static class ConfigureServices
             {
                 
             });
-        
         
         services.AddMassTransitHostedService();
         return services;

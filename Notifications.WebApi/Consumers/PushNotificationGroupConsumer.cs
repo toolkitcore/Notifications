@@ -30,6 +30,6 @@ public class PushNotificationGroupConsumer : IConsumer<PushNotificationGroupMess
             AppId = message.AppId, 
         });
         
-        _logger.LogInformation($"~ ~ ~ ~ ~ ~{DateTime.Now} : Push notification group successful : {id}~ ~ ~ ~ ~ ~ ~");
+        _logger.LogInformation($"~ ~ ~ ~ ~ ~ {DateTime.Now} : Push notification group successful : {id} ~ ~ ~ ~ ~ ~ ~");
     }
 }

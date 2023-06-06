@@ -53,7 +53,6 @@ public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotif
         
         await _cacheService.DeleteAsync("notification-groups");
         
-        
         return notificationGroupNew.Id;
     }
 

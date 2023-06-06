@@ -20,6 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		global.json = global.json
 		README.md = README.md
+		docker-compose.yaml = docker-compose.yaml
+		Dockerfile = Dockerfile
+		.dockerignore = .dockerignore
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationGroups", "NotificationGroups", "{D9B36327-8B1A-4ED7-B19C-496AA9CA8157}"
@@ -68,6 +71,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Notification.MessageContracts", "Shared\MessageContracts\Shared.Notification.MessageContracts\Shared.Notification.MessageContracts.csproj", "{1AC8C820-74E9-4C07-A75F-3310F15BA9F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationGroupPublisher", "NotificationGroupPublisher\NotificationGroupPublisher.csproj", "{D4022C2E-7589-4ACB-B56D-B78CC2C90E1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{FFD6E86C-B367-4CC9-8385-274871A6AFDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Slides", "Slides", "{B310D3A7-DD20-4B10-8A2E-1EAA0B0993A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -152,5 +159,6 @@ Global
 		{1DFD3F4E-7F98-4E5F-B501-2D8D90F1BFD4} = {61FB1F9D-8831-4278-B3BB-413E940C662D}
 		{25B0534F-76B2-46BE-A246-165AC0599008} = {1DFD3F4E-7F98-4E5F-B501-2D8D90F1BFD4}
 		{1AC8C820-74E9-4C07-A75F-3310F15BA9F7} = {9050C9D5-6752-4056-BCC2-5968058B3643}
+		{B310D3A7-DD20-4B10-8A2E-1EAA0B0993A3} = {FFD6E86C-B367-4CC9-8385-274871A6AFDB}
 	EndGlobalSection
 EndGlobal

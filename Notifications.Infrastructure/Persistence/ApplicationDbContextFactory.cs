@@ -11,7 +11,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
         optionsBuilder
-            .UseNpgsql(@"Server=localhost;Port=5432;User Id=postgres;Password=dch;Database=Notifications;", 
+            .UseNpgsql(@"Server=db;Port=5432;User Id=postgres;Password=postgres;Database=Notifications;", 
                 opts =>
                 {
                     opts.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds); 

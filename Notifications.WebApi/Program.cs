@@ -23,6 +23,8 @@ try
         var applicationDbContextSeed = scope.ServiceProvider.GetRequiredService<ApplicationDbContextSeed>();
         await applicationDbContextSeed.InitialiseAsync();
         await applicationDbContextSeed.SeedAsync();
+        var a = await applicationDbContextSeed.GetAllAsync();
+        var b = "";
     }
     
 

@@ -17,7 +17,6 @@ app.UseSwagger((Swashbuckle.AspNetCore.Swagger.SwaggerOptions options) =>
 });
 app.UseSwaggerUI();
 
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

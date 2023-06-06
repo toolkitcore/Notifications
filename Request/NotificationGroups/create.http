@@ -1,9 +1,9 @@
 POST http://localhost:5000/api/notification-groups
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NzM1N2E2OC05ZGU4LTQwOTgtODAyZC1iYTRlOTI2ZGM1NGEiLCJnaXZlbl9uYW1lIjoiZG9jaGlodW5nMTExIiwianRpIjoiODllNGU3ZWUtZmQwYy00NjU4LWE4YzYtZGU1ZWM2MGY5ZGVmIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjg1NjkyNzc5LCJleHAiOjE2ODU5MDg3NzksImlhdCI6MTY4NTY5Mjc3OSwiaXNzIjoieW91LWNhbi1jYWxsLW1lLWJlc3QteWkiLCJhdWQiOiJBdXRoIGVDb21tZXJjZSJ9.6kQBqvHn5xEtYpFAJ0OEhqCu0M4D4DaPwQRgUuPbec0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxY2U3YWY2Yy0xMjYyLTQ2ZmUtOGU1YS02ZDQ0MjdjZDU5N2QiLCJnaXZlbl9uYW1lIjoiZG9jaGlodW5nMTExIiwianRpIjoiYzE3ZmE3YzgtODg2OC00MWNiLThlYTAtNDFiOWJmMDZkNGQyIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjg1OTM1MDk0LCJleHAiOjE2ODYxNTEwOTQsImlhdCI6MTY4NTkzNTA5NCwiaXNzIjoieW91LWNhbi1jYWxsLW1lLWJlc3QteWkiLCJhdWQiOiJBdXRoIGVDb21tZXJjZSJ9.oa6au3sU11s4z7wMtt0CK3ef1X3TKpsjZ_Hv528-TSA
 
 {
-  "code": "111111111",
-  "name": "Notification Group 11111111111111",
-  "appId": "7a4329dc-b31b-402c-a618-bc06706a2b48"
+  "code": "111111345151",
+  "name": "Notification Group 1",
+  "appId": "8f91ce4e-c511-4a56-a788-365dcf96c053"
 }

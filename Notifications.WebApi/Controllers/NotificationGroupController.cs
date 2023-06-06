@@ -10,7 +10,6 @@ using Notifications.Application.NotificationGroups.Queries.GetsWithPagination;
 
 namespace Notifications.WebApi.Controllers;
 
-[Authorize(Roles = "Admin")]
 public class NotificationGroupController : ApiControllerBase
 {
     [HttpGet]
