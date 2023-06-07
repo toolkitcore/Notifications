@@ -29,6 +29,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<User>, IApplicatio
     public DbSet<NotificationTypeChannelConfig> NotificationTypeChannelConfigs { get; set; }
     public DbSet<NotificationTypeChannelTemplate> NotificationTypeChannelTemplates { get; set; }
     public DbSet<NotificationTypeUser> NotificationTypeUsers { get; set; }
+    public DbSet<Product> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

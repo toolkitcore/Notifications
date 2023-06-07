@@ -589,6 +589,30 @@ namespace Notifications.Infrastructure.Persistence.Migrations
                     b.ToTable("NotificationTypeUsers");
                 });
 
+            modelBuilder.Entity("Notifications.Domain.Entities.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("Notifications.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")

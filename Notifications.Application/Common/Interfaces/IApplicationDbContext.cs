@@ -16,7 +16,8 @@ public interface IApplicationDbContext
     public DbSet<NotificationTypeChannelConfig> NotificationTypeChannelConfigs { get; set; }
     public DbSet<NotificationTypeChannelTemplate> NotificationTypeChannelTemplates { get; set; }
     public DbSet<NotificationTypeUser> NotificationTypeUsers { get; set; }
-    
+    public DbSet<Product> Products { get; set; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     int SaveChanges();
 }

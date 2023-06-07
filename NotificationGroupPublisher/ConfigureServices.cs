@@ -5,6 +5,7 @@ using MassTransit.Definition;
 using MediatR;
 using Notifications.WebApi.Consumers;
 using RabbitMQ.Client;
+using Shared.Crawler.MessageContacts;
 using Shared.MessageBroker.RabbitMQ.Extensions;
 using Shared.Notification.MessageContracts;
 using NotificationTopic = Shared.Notification.MessageContracts.Constant;
@@ -36,10 +37,12 @@ public static class ConfigureServices
             {
                 configurator.AddRequestClient<PushNotificationGroupMessage>(new Uri(
                     setting.GetPublishEndpoint(NotificationTopic.TopicConstant.PushNotificationGroup)));
+                
             },
             (context, cfg, setting) =>
             {
-                
+
+                cfg.ConfigureEndpoints(context);
             });
         
         services.AddMassTransitHostedService();

@@ -22,6 +22,7 @@
       <ProjectReference Include="..\Shared\Authorization\Shared.Authorization\Shared.Authorization.csproj" />
       <ProjectReference Include="..\Shared\MessageContracts\Shared.MessageBroker.RabbitMQ\Shared.MessageBroker.RabbitMQ.csproj" />
       <ProjectReference Include="..\Shared\MessageContracts\Shared.Notification.MessageContracts\Shared.Notification.MessageContracts.csproj" />
+      <ProjectReference Include="..\Shared\Shared.Crawler.MessageContacts\Shared.Crawler.MessageContacts.csproj" />
       <ProjectReference Include="..\Shared\Shared.Logging\Shared.Logging.csproj" />
     </ItemGroup>
 

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Notifications.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230525031217_Init-Database")]
+    [Migration("20230607014527_Init-Database")]
     partial class InitDatabase
     {
         /// <inheritdoc />
@@ -590,6 +590,30 @@ namespace Notifications.Infrastructure.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("NotificationTypeUsers");
+                });
+
+            modelBuilder.Entity("Notifications.Domain.Entities.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Notifications.Domain.Entities.User", b =>

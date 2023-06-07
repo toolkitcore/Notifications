@@ -7,6 +7,7 @@ using Notifications.Application;
 using Notifications.Infrastructure;
 using Notifications.WebApi.Consumers;
 using Shared.Authorization.Extensions;
+using Shared.Crawler.MessageContacts;
 using ZymLabs.NSwag.FluentValidation;
 using Shared.MessageBroker.RabbitMQ.Extensions;
 using Shared.Notification.MessageContracts;
@@ -55,7 +56,12 @@ public static class ConfigureServices
             configuration,
             (configurator, setting) =>
             {
+                configurator.AddConsumer<CrawlerDataConsumer>();
+                
                 configurator.AddConsumer<PushNotificationGroupConsumer>();
+                
+                configurator.AddRequestClient<CrawlerDataConsumer>(new Uri(
+                    setting.GetPublishEndpoint("crawler-data")));
             },
             (context, cfg, setting) =>
             {
@@ -69,10 +75,26 @@ public static class ConfigureServices
                         endpointConfigurator.ConfigureConsumer<PushNotificationGroupConsumer>(context);
                     });
                 
+                cfg.ReceiveEndpoint($"{setting.GetReceiveEndpoint("crawler-data")}",
+                    endpointConfigurator =>
+                    {
+                        endpointConfigurator.Bind("crawler-data");
+                        endpointConfigurator.Bind<CrawlerDataMessage>();
+                        endpointConfigurator.UseRetry(r => r.Interval(3, TimeSpan.FromSeconds(3)));
+                        endpointConfigurator.UseRateLimit(5);
+                        endpointConfigurator.ConfigureConsumer<CrawlerDataConsumer>(context);
+                    });
+                
                 cfg.ConfigureEndpoints(context);
                 
             }
         );
+        
+        services.AddScoped<IRequestClient<CrawlerDataMessage>>(provider =>
+        {
+            var busControl = provider.GetRequiredService<IBusControl>();
+            return busControl.CreateRequestClient<CrawlerDataMessage>();
+        });
         services.AddMassTransitHostedService();
         return services;
     }
