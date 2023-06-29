@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Notifications.Application.Common.Exceptions;
 using Notifications.Application.Common.Interfaces;
+using Notifications.Application.Common.Models.Responses;
 using Notifications.Domain.Entities;
 using Shared.Caching.Abstractions;
 using Shared.Utilities;
@@ -10,7 +11,7 @@ using ApplicationException = Notifications.Application.Common.Exceptions.Applica
 
 namespace Notifications.Application.NotificationGroups.Commands.Update;
 
-public record UpdateNotificationGroupCommand : IRequest<Unit>
+public record UpdateNotificationGroupCommand : IRequest<ApiResponse>
 {
     public Guid Id { get; set; }
     public string Code { get; set; }
@@ -21,7 +22,7 @@ public record UpdateNotificationGroupCommand : IRequest<Unit>
     public Guid AppId { get; set; }
 }
 
-public class UpdateNotificationGroupCommandHandler : IRequestHandler<UpdateNotificationGroupCommand>
+public class UpdateNotificationGroupCommandHandler : IRequestHandler<UpdateNotificationGroupCommand, ApiResponse>
 {
     private readonly IApplicationDbContext _context;
     private readonly ICacheService _cacheService;
@@ -32,7 +33,7 @@ public class UpdateNotificationGroupCommandHandler : IRequestHandler<UpdateNotif
         _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
     }
     
-    public async Task<Unit> Handle(UpdateNotificationGroupCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse> Handle(UpdateNotificationGroupCommand request, CancellationToken cancellationToken)
     {
         await ValidateRequest(request, cancellationToken);
         
@@ -53,7 +54,7 @@ public class UpdateNotificationGroupCommandHandler : IRequestHandler<UpdateNotif
         
         await _cacheService.DeleteAsync("notification-groups");
         
-        return Unit.Value;
+        return new ApiResponse();
     }
 
     private async Task ValidateRequest(UpdateNotificationGroupCommand request, CancellationToken cancellationToken)

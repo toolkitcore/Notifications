@@ -24,7 +24,6 @@ public static class ConfigureServices
 
         services.AddScoped<ApplicationDbContextSeed>();
         
-        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
         
         services
             .AddDefaultIdentity<User>()

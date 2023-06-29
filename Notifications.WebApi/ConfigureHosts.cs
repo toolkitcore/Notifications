@@ -1,4 +1,7 @@
-﻿namespace Notifications.WebApi;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+
+namespace Notifications.WebApi;
 
 public static class ConfigureHosts
 {

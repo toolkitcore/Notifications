@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Notifications.Application.Common.Exceptions;
 using Notifications.Application.Common.Interfaces;
+using Notifications.Application.Common.Models.Responses;
 using Notifications.Domain.Entities;
 using Shared.Caching.Abstractions;
 using Shared.Utilities;
@@ -10,7 +11,7 @@ using ApplicationException = Notifications.Application.Common.Exceptions.Applica
 
 namespace Notifications.Application.NotificationGroups.Commands.Create;
 
-public record CreateNotificationGroupCommand : IRequest<Guid>
+public record CreateNotificationGroupCommand : IRequest<ApiResponse<Guid>>
 {
     public string Code { get; set; }
     public string Name { get; set; }
@@ -21,7 +22,7 @@ public record CreateNotificationGroupCommand : IRequest<Guid>
     public Guid AppId { get; set; }
 }
 
-public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotificationGroupCommand, Guid>
+public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotificationGroupCommand, ApiResponse<Guid>>
 {
     private readonly IApplicationDbContext _context;
     private readonly ICacheService _cacheService;
@@ -32,7 +33,7 @@ public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotif
         _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
     }
     
-    public async Task<Guid> Handle(CreateNotificationGroupCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<Guid>> Handle(CreateNotificationGroupCommand request, CancellationToken cancellationToken)
     {
         await ValidateRequest(request, cancellationToken);
         var notificationGroupNew = new NotificationGroup()
@@ -53,7 +54,7 @@ public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotif
         
         await _cacheService.DeleteAsync("notification-groups");
         
-        return notificationGroupNew.Id;
+        return new ApiResponse<Guid>(notificationGroupNew.Id);
     }
 
     public async Task ValidateRequest(CreateNotificationGroupCommand request, CancellationToken cancellationToken)

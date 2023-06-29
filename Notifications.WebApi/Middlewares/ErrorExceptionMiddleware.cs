@@ -3,6 +3,7 @@ using FluentValidation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Notifications.Application.Common.Models.Abstractions;
+using Notifications.Application.Common.Models.Responses;
 using ApplicationException = Notifications.Application.Common.Exceptions.ApplicationException;
 
 namespace Notifications.WebApi.Middlewares;
@@ -26,60 +27,45 @@ public class ErrorExceptionMiddleware
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
-            Console.WriteLine(ex.StackTrace);
-            await HandleExceptionAsync(httpContext, ex, _logger);
+            await HandleExceptionAsync(httpContext, ex);
+            _logger.LogError(ex.Message);
         }
     }
 
-    private async Task HandleExceptionAsync(HttpContext context, Exception exception, ILogger<ErrorExceptionMiddleware> logger)
+    #region [PRIVATE METHOD]
+
+    private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        ApiResponseBase response = new ApiResponseBase();
 
-        var jsonSettings = new JsonSerializerSettings
-        {
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            }
-        };
-
-        if (exception is UnauthorizedAccessException)
-        {
-            logger?.LogWarning("Unauthorized request");
-            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            await context.Response.WriteAsync("Unauthorized");
-            return;
-        }
-
-        var (statusCode, modelResult) = ErrorExceptionMiddlewareHandler.Handle(exception);
-
-        context.Response.StatusCode = statusCode;
-        await context.Response.WriteAsync(
-            JsonConvert.SerializeObject(modelResult, jsonSettings));
-    }
-}
-
-public static class ErrorExceptionMiddlewareHandler
-{
-    public static (int statusCode, ResultModel resultModel) Handle(Exception exception)
-    {
         switch (exception)
         {
             case ValidationException validationException:
-                var validationErrorModel = ResultModel
-                    .Failure(validationException.Errors.GroupBy(x => x.PropertyName)
-                        .ToDictionary(x => x.Key, x => x.Select(y => y.ErrorMessage).ToList()));
-                return ((int)HttpStatusCode.BadRequest, validationErrorModel);
-            
+            {
+                response.Error = validationException.Errors.GroupBy(x => x.PropertyName)
+                    .ToDictionary(x => x.Key, x => x.Select(y => y.ErrorMessage).ToList());
+                response.StatusCode = HttpStatusCode.BadRequest;
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                break;
+            }
             case ApplicationException applicationException:
-                return ((int)HttpStatusCode.BadRequest, ResultModel.Failure(applicationException.ErrorKey));
-
+            {
+                response.ErrorKey = applicationException.ErrorKey;
+                response.StatusCode = HttpStatusCode.BadRequest;
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                break;
+            }
             default:
             {
-                return ((int)HttpStatusCode.InternalServerError, ResultModel.Failure(exception.Message));
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                break;
             }
         }
+
+        context.Response.ContentType = "application/json";
+
+        await context.Response.WriteAsync(JsonConvert.SerializeObject(response));
     }
+
+    #endregion
 }

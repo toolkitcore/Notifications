@@ -1,4 +1,6 @@
-﻿namespace Notifications.WebApi.Middlewares;
+﻿using Microsoft.AspNetCore.Builder;
+
+namespace Notifications.WebApi.Middlewares;
 
 public static class UseMiddleware
 {

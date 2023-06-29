@@ -24,7 +24,6 @@ public class CrawlerDataConsumer : IConsumer<CrawlerDataMessage>
             Source = message.Source
         });
         
-        
         await context.RespondAsync(products);
     }
 }

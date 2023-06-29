@@ -23,6 +23,4 @@ public class ProductController : ApiControllerBase
         return Ok(response.Message);
     }
     
-    
-
 }

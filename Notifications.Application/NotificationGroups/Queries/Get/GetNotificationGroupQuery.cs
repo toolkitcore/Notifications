@@ -4,15 +4,16 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Notifications.Application.Common.Exceptions;
 using Notifications.Application.Common.Interfaces;
+using Notifications.Application.Common.Models.Responses;
 using Notifications.Application.NotificationGroups.Models;
 using Shared.Caching.Abstractions;
 using ApplicationException = Notifications.Application.Common.Exceptions.ApplicationException;
 
 namespace Notifications.Application.NotificationGroups.Queries.Get;
 
-public record GetNotificationGroupQuery(Guid groupId) : IRequest<NotificationGroupDto>;
+public record GetNotificationGroupQuery(Guid groupId) : IRequest<ApiResponse<NotificationGroupDto>>;
 
-public class GetNotificationGroupQueryHandler : IRequestHandler<GetNotificationGroupQuery, NotificationGroupDto>
+public class GetNotificationGroupQueryHandler : IRequestHandler<GetNotificationGroupQuery, ApiResponse<NotificationGroupDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly ICacheService _cacheService;
@@ -25,7 +26,7 @@ public class GetNotificationGroupQueryHandler : IRequestHandler<GetNotificationG
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
     
-    public async Task<NotificationGroupDto> Handle(GetNotificationGroupQuery request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<NotificationGroupDto>> Handle(GetNotificationGroupQuery request, CancellationToken cancellationToken)
     {
         // var cacheData = _cacheService.GetData<PaginatedList<NotificationGroupDto>>("notification-groups");
         // var notificationGroupCache = cacheData.Items.FirstOrDefault(x => x.Id == request.groupId);
@@ -42,6 +43,6 @@ public class GetNotificationGroupQueryHandler : IRequestHandler<GetNotificationG
         if (notificationGroup is null)
             throw new ApplicationException(ErrorCode.NotificationGroupNotFound, ErrorCode.NotificationGroupNotFound);
 
-        return notificationGroup;
+        return new ApiResponse<NotificationGroupDto>(notificationGroup);
     }
 }

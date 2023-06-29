@@ -1,8 +1,14 @@
-﻿using GreenPipes;
+﻿using System;
+using System.Collections.Generic;
+using GreenPipes;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Notifications.Application;
 using Notifications.Infrastructure;
 using Notifications.WebApi.Consumers;

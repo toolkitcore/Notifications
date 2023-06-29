@@ -14,39 +14,37 @@ public class NotificationGroupController : ApiControllerBase
 {
     [HttpGet]
     [Route("api/notification-groups")]
-    public async Task<ActionResult<PaginatedList<NotificationGroupDto>>> GetAllAsync([FromQuery]GetNotificationGroupsWithWithPaginationQuery query)
+    public async Task<IActionResult> GetAllAsync([FromQuery]GetNotificationGroupsWithWithPaginationQuery query)
     {
-        return await Mediator.Send(query).ConfigureAwait(false);
+        return Ok(await Mediator.Send(query).ConfigureAwait(false));
     }
     
     [HttpGet]
     [Route("api/notification-groups/{id:guid}")]
-    public async Task<ActionResult<NotificationGroupDto>> GetAsync([FromRoute(Name = "id")]Guid notificationGroupId)
+    public async Task<IActionResult> GetAsync([FromRoute(Name = "id")]Guid notificationGroupId)
     {
-        return await Mediator.Send(new GetNotificationGroupQuery(notificationGroupId));
+        return Ok(await Mediator.Send(new GetNotificationGroupQuery(notificationGroupId)));
     }
 
     [HttpPost]
     [Route("api/notification-groups")]
-    public async Task<ActionResult<Guid>> CreateAsync([FromBody]CreateNotificationGroupCommand command)
+    public async Task<IActionResult> CreateAsync([FromBody]CreateNotificationGroupCommand command)
     {
-        return await Mediator.Send(command).ConfigureAwait(false);
+        return Ok(await Mediator.Send(command).ConfigureAwait(false));
     }
     
     [HttpPut]
     [Route("api/notification-groups/{id:guid}")]
-    public async Task<ActionResult> UpdateAsync([FromRoute(Name = "id")]Guid notificationGroupId, [FromBody]UpdateNotificationGroupCommand command)
+    public async Task<IActionResult> UpdateAsync([FromRoute(Name = "id")]Guid notificationGroupId, [FromBody]UpdateNotificationGroupCommand command)
     {
-        await Mediator.Send(command).ConfigureAwait(false);
-        return NoContent();
+        return Ok(await Mediator.Send(command).ConfigureAwait(false));
     }
     
     [HttpDelete]
     [Route("api/notification-groups/{id:guid}")]
-    public async Task<ActionResult<Guid>> DeleteAsync([FromRoute(Name = "id")] Guid notificationGroupId)
+    public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] Guid notificationGroupId)
     {
-        await Mediator.Send(new DeleteNotificationGroupCommand(notificationGroupId));
-        return NoContent();
+        return Ok(await Mediator.Send(new DeleteNotificationGroupCommand(notificationGroupId)));
     }
 
 }

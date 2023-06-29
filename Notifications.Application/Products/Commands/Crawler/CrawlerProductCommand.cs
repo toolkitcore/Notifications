@@ -18,7 +18,6 @@ public class CrawlerProductCommand : IRequest<CrawlerProductCommandResponse>
 }
 
 
-
 public class CrawlerProductCommandHandler : IRequestHandler<CrawlerProductCommand, CrawlerProductCommandResponse>
 {
     
@@ -72,10 +71,17 @@ public class CrawlerProductCommandHandler : IRequestHandler<CrawlerProductComman
         
         var p = products;
         await _context.Products.AddRangeAsync(products, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
         return new CrawlerProductCommandResponse()
         {
             Products = products.Select(p => new ProductDto(){Id = p.Id, Name = p.Name, Image = p.Image, Price = p.Price}).ToList()
         };
+    }
+    
+    // Regex
+    private static decimal ConvertCurrencyRegex(string currencyValue)
+    {
+        return default!;
     }
     
     private static decimal ConvertCurrency(string currencyValue)
@@ -90,4 +96,5 @@ public class CrawlerProductCommandHandler : IRequestHandler<CrawlerProductComman
 
         return convertedValue;
     }
+    
 }

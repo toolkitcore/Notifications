@@ -5,18 +5,19 @@ using Notifications.Application.Common.Interfaces;
 using Notifications.Application.Common.Mappings;
 using Notifications.Application.Common.Models.Abstractions;
 using Notifications.Application.Common.Models.PaginatedList;
+using Notifications.Application.Common.Models.Responses;
 using Notifications.Application.NotificationGroups.Models;
 using Shared.Caching.Abstractions;
 
 namespace Notifications.Application.NotificationGroups.Queries.GetsWithPagination;
 
-public class GetNotificationGroupsWithWithPaginationQuery : FilterRequestModel ,IRequest<PaginatedList<NotificationGroupDto>>
+public class GetNotificationGroupsWithWithPaginationQuery : FilterRequestModel ,IRequest<ApiResponse<PaginatedList<NotificationGroupDto>>>
 {
     public Guid? NotificationGroupId { get; set; }
 }
 
 public class GetNotificationGroupsWithPaginationQueryHandler : IRequestHandler<GetNotificationGroupsWithWithPaginationQuery,
-    PaginatedList<NotificationGroupDto>>
+    ApiResponse<PaginatedList<NotificationGroupDto>>>
 {
     private readonly IApplicationDbContext _context;
     private readonly ICacheService _cacheService;
@@ -29,7 +30,7 @@ public class GetNotificationGroupsWithPaginationQueryHandler : IRequestHandler<G
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
     
-    public async Task<PaginatedList<NotificationGroupDto>> Handle(GetNotificationGroupsWithWithPaginationQuery request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<PaginatedList<NotificationGroupDto>>> Handle(GetNotificationGroupsWithWithPaginationQuery request, CancellationToken cancellationToken)
     {
         // var cacheData = _cacheService.GetData<PaginatedList<NotificationGroupDto>> ("notification-groups");
         // if (cacheData is not null)
@@ -46,6 +47,6 @@ public class GetNotificationGroupsWithPaginationQueryHandler : IRequestHandler<G
         // var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
         // _cacheService.SetData<PaginatedList<NotificationGroupDto>> ("notification-groups", notificationGroupPaginatedList, expirationTime);
         
-        return notificationGroupPaginatedList;
+        return new ApiResponse<PaginatedList<NotificationGroupDto>>(notificationGroupPaginatedList);
     }
 }
