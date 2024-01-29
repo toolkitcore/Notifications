@@ -4,6 +4,9 @@ namespace Notifications.Application.NotificationGroups.Queries.GetsWithPaginatio
 
 public class GetNotificationGroupsWithPaginationQueryValidator : AbstractValidator<GetNotificationGroupsWithWithPaginationQuery>
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public GetNotificationGroupsWithPaginationQueryValidator()
     {
         RuleFor(x => x.PageIndex)

@@ -23,12 +23,21 @@ public class CrawlerProductCommandHandler : IRequestHandler<CrawlerProductComman
     
     private readonly IApplicationDbContext _context;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
     public CrawlerProductCommandHandler(IApplicationDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<CrawlerProductCommandResponse> Handle(CrawlerProductCommand request, CancellationToken cancellationToken)
     {
 
@@ -84,6 +93,11 @@ public class CrawlerProductCommandHandler : IRequestHandler<CrawlerProductComman
         return default!;
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="currencyValue"></param>
+    /// <returns></returns>
     private static decimal ConvertCurrency(string currencyValue)
     {
         int endIndex = currencyValue.IndexOf("₫");

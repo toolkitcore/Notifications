@@ -23,6 +23,14 @@ public class SignUpCommandHandler : IRequestHandler<SignUpCommand, Authenticatio
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="userRepository"></param>
+    /// <param name="jwtTokenGenerator"></param>
+    /// <param name="userManager"></param>
+    /// <param name="roleManager"></param>
     public SignUpCommandHandler(IApplicationDbContext context, IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -32,7 +40,12 @@ public class SignUpCommandHandler : IRequestHandler<SignUpCommand, Authenticatio
         _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
     }
     
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<AuthenticationResult> Handle(SignUpCommand request, CancellationToken cancellationToken)
     {
         var userExist = await _userRepository.GetByUserNameAsync(request.UserName, cancellationToken);

@@ -5,5 +5,10 @@ namespace Notifications.Application.Common.Interfaces;
 
 public interface IIdentityService
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
     Task<IList<string>> GetRolesAsync(User user);
 }

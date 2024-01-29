@@ -18,6 +18,11 @@ public interface IApplicationDbContext
     public DbSet<NotificationTypeUser> NotificationTypeUsers { get; set; }
     public DbSet<Product> Products { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     int SaveChanges();
 }

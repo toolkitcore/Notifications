@@ -5,6 +5,9 @@ namespace Notifications.Application.NotificationGroups.Commands.Create;
 
 public class CreateNotificationGroupCommandValidator : AbstractValidator<CreateNotificationGroupCommand>
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public CreateNotificationGroupCommandValidator()
     {
         RuleFor(a => a.Code)

@@ -9,12 +9,21 @@ public class ApplicationDbContextSeed
     private readonly ILogger<ApplicationDbContextSeed> _logger;
     private readonly ApplicationDbContext _context;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <param name="context"></param>
     public ApplicationDbContextSeed(ILogger<ApplicationDbContextSeed> logger, ApplicationDbContext context)
     {
         _logger = logger;
         _context = context;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public async Task InitialiseAsync()
     {
         try
@@ -29,6 +38,10 @@ public class ApplicationDbContextSeed
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public async Task SeedAsync()
     {
         try
@@ -43,7 +56,10 @@ public class ApplicationDbContextSeed
         }
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public async Task TrySeedAsync()
     {
         if (!_context.Apps.Any())
@@ -72,6 +88,10 @@ public class ApplicationDbContextSeed
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public async Task<IEnumerable<App>> GetAllAsync()
     {
         return await _context.Apps.ToListAsync();

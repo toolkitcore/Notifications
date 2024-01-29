@@ -5,6 +5,9 @@ namespace Notifications.Application.NotificationGroups.Commands.Update;
 
 public class UpdateNotificationGroupCommandValidator : AbstractValidator<UpdateNotificationGroupCommand>
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public UpdateNotificationGroupCommandValidator()
     {
         RuleFor(a => a.Code)

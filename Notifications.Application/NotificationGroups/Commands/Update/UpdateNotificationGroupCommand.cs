@@ -27,12 +27,23 @@ public class UpdateNotificationGroupCommandHandler : IRequestHandler<UpdateNotif
     private readonly IApplicationDbContext _context;
     private readonly ICacheService _cacheService;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="cacheService"></param>
     public UpdateNotificationGroupCommandHandler(IApplicationDbContext context, ICacheService cacheService)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse> Handle(UpdateNotificationGroupCommand request, CancellationToken cancellationToken)
     {
         await ValidateRequest(request, cancellationToken);
@@ -57,6 +68,12 @@ public class UpdateNotificationGroupCommandHandler : IRequestHandler<UpdateNotif
         return new ApiResponse();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     private async Task ValidateRequest(UpdateNotificationGroupCommand request, CancellationToken cancellationToken)
     {
         var notificationGroupDuplicate = await _context.NotificationGroups

@@ -27,12 +27,23 @@ public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotif
     private readonly IApplicationDbContext _context;
     private readonly ICacheService _cacheService;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="cacheService"></param>
     public CreateNotificationGroupCommandHandler(IApplicationDbContext context, ICacheService cacheService)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse<Guid>> Handle(CreateNotificationGroupCommand request, CancellationToken cancellationToken)
     {
         await ValidateRequest(request, cancellationToken);
@@ -57,6 +68,12 @@ public class CreateNotificationGroupCommandHandler : IRequestHandler<CreateNotif
         return new ApiResponse<Guid>(notificationGroupNew.Id);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task ValidateRequest(CreateNotificationGroupCommand request, CancellationToken cancellationToken)
     {
         var isExistNotificationGroup = await _context.NotificationGroups

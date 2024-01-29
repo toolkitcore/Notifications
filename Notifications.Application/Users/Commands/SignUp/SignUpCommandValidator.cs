@@ -4,6 +4,9 @@ namespace Notifications.Application.Users.Commands.SignUp;
 
 public class SignUpCommandValidator : AbstractValidator<SignUpCommand>
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public SignUpCommandValidator()
     {
         RuleFor(x => x.UserName)

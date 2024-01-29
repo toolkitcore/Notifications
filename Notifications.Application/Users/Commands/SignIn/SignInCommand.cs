@@ -20,12 +20,23 @@ public class SignUpCommandHandler : IRequestHandler<SignInCommand, Authenticatio
     private readonly IUserRepository _userRepository;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="userRepository"></param>
+    /// <param name="jwtTokenGenerator"></param>
     public SignUpCommandHandler(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
     {
         _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         _jwtTokenGenerator = jwtTokenGenerator ?? throw new ArgumentNullException(nameof(jwtTokenGenerator));
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<AuthenticationResult> Handle(SignInCommand request, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetByUserNameAsync(request.UserName, cancellationToken);

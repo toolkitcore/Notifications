@@ -9,12 +9,22 @@ namespace Notifications.Infrastructure.Repositories.NotificationGroups;
 public class UserRedisRepository : IUserRepository
 {
     private readonly ICacheService _cacheService;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cacheService"></param>
     public UserRedisRepository(ICacheService cacheService)
     {
         _cacheService = cacheService;
     }
     
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<User> GetByIdAsync(string Id, CancellationToken cancellationToken)
     {
         var users = await _cacheService.GetAsync<List<User>>(nameof(User));
@@ -26,6 +36,12 @@ public class UserRedisRepository : IUserRepository
         return users[index];
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="userName"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<User> GetByUserNameAsync(string userName, CancellationToken cancellationToken)
     {
         var users = await _cacheService.GetAsync<List<User>>(nameof(User));
@@ -37,6 +53,12 @@ public class UserRedisRepository : IUserRepository
         return users[index];
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<User> CreateAsync(User entity, CancellationToken cancellationToken)
     {
         var users = await _cacheService.GetAsync<List<User>>(nameof(User));

@@ -15,12 +15,22 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     private readonly JwtSettings _jwtSettings;
     private readonly IIdentityService _identityService;
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="jwtSettings"></param>
+    /// <param name="identityService"></param>
     public JwtTokenGenerator(IOptions<JwtSettings> jwtSettings, IIdentityService identityService)
     {
         _jwtSettings = jwtSettings.Value ?? throw new ArgumentNullException(nameof(jwtSettings));
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
     public async Task<string> Generate(User user)
     {
         var roles = await _identityService.GetRolesAsync(user);

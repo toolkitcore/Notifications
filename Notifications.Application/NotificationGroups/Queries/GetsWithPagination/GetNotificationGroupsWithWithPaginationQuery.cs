@@ -23,6 +23,12 @@ public class GetNotificationGroupsWithPaginationQueryHandler : IRequestHandler<G
     private readonly ICacheService _cacheService;
     private readonly IMapper _mapper;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="cacheService"></param>
+    /// <param name="mapper"></param>
     public GetNotificationGroupsWithPaginationQueryHandler(IApplicationDbContext context, ICacheService cacheService, IMapper mapper)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -30,6 +36,12 @@ public class GetNotificationGroupsWithPaginationQueryHandler : IRequestHandler<G
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse<PaginatedList<NotificationGroupDto>>> Handle(GetNotificationGroupsWithWithPaginationQuery request, CancellationToken cancellationToken)
     {
         // var cacheData = _cacheService.GetData<PaginatedList<NotificationGroupDto>> ("notification-groups");

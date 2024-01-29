@@ -9,11 +9,21 @@ public class NotificationGroupCompletedEventHandler: INotificationHandler<Domain
 {
     private readonly ILogger<NotificationGroupCompletedEventHandler> _logger;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="logger"></param>
     public NotificationGroupCompletedEventHandler(ILogger<NotificationGroupCompletedEventHandler> logger)
     {
         _logger = logger;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="notification"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public Task Handle(DomainEventNotification<NotificationGroupCompletedEvent> notification, CancellationToken cancellationToken)
     {
         var domainEvent = notification.DomainEvent;

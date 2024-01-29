@@ -31,6 +31,10 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<User>, IApplicatio
     public DbSet<NotificationTypeUser> NotificationTypeUsers { get; set; }
     public DbSet<Product> Products { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="modelBuilder"></param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
@@ -38,12 +42,21 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<User>, IApplicatio
         base.OnModelCreating(modelBuilder);
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
         this.ApplyAuditFieldsToModifiedEntities();
         return base.SaveChangesAsync(cancellationToken);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public override int SaveChanges()
     {
         this.ApplyAuditFieldsToModifiedEntities();
@@ -51,6 +64,9 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<User>, IApplicatio
     }
     
     #region [PRIVATE METHOD]
+    /// <summary>
+    /// 
+    /// </summary>
     private void ApplyAuditFieldsToModifiedEntities()
     {
         var modified = ChangeTracker.Entries()

@@ -9,11 +9,22 @@ public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavio
 
     private readonly ILogger<TRequest> _logger;
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="logger"></param>
     public UnhandledExceptionBehaviour(ILogger<TRequest> logger)
     {
         _logger = logger;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="next"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         try

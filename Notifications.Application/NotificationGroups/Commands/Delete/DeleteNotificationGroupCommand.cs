@@ -14,12 +14,23 @@ public class DeleteNotificationGroupCommandHandler : IRequestHandler<DeleteNotif
     private readonly IApplicationDbContext _context;
     private readonly ICacheService _cacheService;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="cacheService"></param>
     public DeleteNotificationGroupCommandHandler(IApplicationDbContext context, ICacheService cacheService)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse> Handle(DeleteNotificationGroupCommand request, CancellationToken cancellationToken)
     {
         var notificationGroup = await _context.NotificationGroups.FindAsync(new[] { request.groupId }, cancellationToken).ConfigureAwait(false);

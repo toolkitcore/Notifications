@@ -5,11 +5,18 @@ namespace Notifications.Application.Common.Mappings;
 
 public class MappingProfile : Profile
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public MappingProfile()
     {
         ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="assembly"></param>
     private void ApplyMappingsFromAssembly(Assembly assembly)
     {
         var mapFromType = typeof(IMapFrom<>);
