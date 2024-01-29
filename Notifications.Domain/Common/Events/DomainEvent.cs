@@ -9,6 +9,9 @@ public interface IHasDomainEvent
 
 public abstract class DomainEvent
 {
+    /// <summary>
+    /// 
+    /// </summary>
     protected DomainEvent()
     {
         DateOccurred = DateTimeOffset.UtcNow;

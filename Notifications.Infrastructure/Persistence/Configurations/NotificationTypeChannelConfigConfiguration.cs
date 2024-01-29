@@ -6,6 +6,10 @@ namespace Notifications.Infrastructure.Persistence.Configurations;
 
 public class NotificationTypeChannelConfigConfiguration : IEntityTypeConfiguration<NotificationTypeChannelConfig>
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="builder"></param>
     public void Configure(EntityTypeBuilder<NotificationTypeChannelConfig> builder)
     {
         builder.HasKey(n => n.Id);

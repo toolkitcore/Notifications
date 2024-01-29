@@ -6,6 +6,10 @@ namespace Notifications.Infrastructure.Persistence.Configurations;
 
 public class NotificationTypeUserConfiguration : IEntityTypeConfiguration<NotificationTypeUser>
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="builder"></param>
     public void Configure(EntityTypeBuilder<NotificationTypeUser> builder)
     {
         builder.HasKey(n => n.Id);

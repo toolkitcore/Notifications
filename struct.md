@@ -1,0 +1,135 @@
+# Struct
+
+MassTransit
+MassTransit.Extensions.DependencyInjection
+Microsoft.AspNetCore.OpenApi
+Swashbuckle.AspNetCore
+Microsoft.Extensions.DependencyInjection.Abstractions
+Microsoft.Extensions.Logging.Abstractions
+AutoMapper.Extensions.Microsoft.DependencyInjection
+FluentValidation.DependencyInjectionExtensions
+MediatR.Extensions.Microsoft.DependencyInjection
+Microsoft.AspNetCore.ApiAuthorization.IdentityServer
+PuppeteerSharp
+MediatR.ContractsRedisSetting
+Microsoft.AspNetCore.Identity
+Microsoft.EntityFrameworkCore
+Microsoft.Extensions.Identity.Stores
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools.DotNet
+Microsoft.Extensions.Configuration.Abstractions
+Microsoft.Extensions.DependencyInjection
+Microsoft.Extensions.Logging.Console
+Microsoft.IdentityModel.Protocols
+Npgsql.EntityFrameworkCore.PostgreSQL
+StackExchange.Redis
+System.Data.SqlClient
+Microsoft.AspNetCore.Authentication.JwtBearer
+Microsoft.IdentityModel.Tokens
+Microsoft.Extensions.Caching.Memory
+Newtonsoft.Json
+Polly
+MassTransit.AspNetCore
+MassTransit.RabbitMQ
+Microsoft.Extensions.Hosting.Abstractions
+Serilog [https://github.com/serilog/serilog]
+Serilog.AspNetCore [https://github.com/serilog/serilog-aspnetcore]
+Serilog.Enrichers.Environment [https://github.com/serilog/serilog-enrichers-environment]
+Serilog.Extensions.Logging [https://github.com/serilog/serilog-extensions-logging]
+Serilog.Formatting.Compact [https://github.com/serilog/serilog-formatting-compact]
+Serilog.Settings.Configuration [https://github.com/serilog/serilog-settings-configuration]
+Serilog.Sinks.Console [https://github.com/serilog/serilog-sinks-console]
+Serilog.Sinks.Debug [https://github.com/serilog/serilog-sinks-debug]
+Serilog.Sinks.File [https://github.com/serilog/serilog-sinks-file]
+Serilog.Sinks.PeriodicBatching [https://github.com/serilog/serilog-sinks-periodicbatching]
+Microsoft.AspNetCore.Http.Features
+Microsoft.Extensions.Configuration.Binder
+FluentValidation [https://github.com/FluentValidation/FluentValidation]
+FluentValidation.AspNetCore [https://github.com/FluentValidation/FluentValidation.AspNetCore]
+FluentValidation.DependencyInjectionExtensions
+NSwag.AspNetCore
+ZymLabs.NSwag.FluentValidation
+
+# Classes
+
+NotificationGroupPublisher
+ApiControllerBase
+NotificationGroupController
+ProductController
+
+ICreationAuditEntity
+IDeletionAuditEntity
+IModificationAuditEntity
+AuditEntity
+AuditEntityBase
+FullAuditEntity
+IHasDomainEvent
+DomainEvent
+DatabaseSetting
+JwtSettings
+MassTransitSetting
+RedisSetting
+ENotificationStatus
+NotificationGroupCompletedEvent
+NotificationGroupCreatedEvent
+NotificationGroupDeletedEvent
+NotificationGroupUpdatedEvent
+EntityNotFoundException
+InvalidEntityTypeException
+App
+ChannelTemplate
+Notification
+NotificationGroup
+NotificationType
+NotificationTypeChannel
+NotificationTypeChannelConfig
+NotificationTypeChannelTemplate
+NotificationTypeUser
+Product
+User
+UserFirebaseToken
+
+IdentityService
+AppConfiguration
+ChannelTemplateConfiguration
+NotificationConfiguration
+NotificationGroupConfiguration
+NotificationTypeChannelConfigConfiguration
+NotificationTypeChannelConfiguration
+NotificationTypeChannelTemplateConfiguration
+NotificationTypeConfiguration
+NotificationTypeUserConfiguration
+ProductConfiguration
+UserConfiguration
+UserFirebaseTokenConfiguration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

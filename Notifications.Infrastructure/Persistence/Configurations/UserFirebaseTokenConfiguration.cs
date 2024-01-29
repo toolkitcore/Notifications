@@ -6,6 +6,10 @@ namespace Notifications.Infrastructure.Persistence.Configurations;
 
 public class UserFirebaseTokenConfiguration : IEntityTypeConfiguration<UserFirebaseToken>
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="builder"></param>
     public void Configure(EntityTypeBuilder<UserFirebaseToken> builder)
     {
         builder.HasKey(n => n.Id);

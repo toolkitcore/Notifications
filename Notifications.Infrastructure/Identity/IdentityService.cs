@@ -14,6 +14,10 @@ public class IdentityService : IIdentityService
     private readonly IUserClaimsPrincipalFactory<User> _userClaimsPrincipalFactory;
     private readonly IAuthorizationService _authorizationService;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="userManager"></param>
     public IdentityService(
         UserManager<User> userManager
     )
@@ -21,6 +25,11 @@ public class IdentityService : IIdentityService
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
     public async Task<IList<string>> GetRolesAsync(User user)
     {
         return await _userManager.GetRolesAsync(user);

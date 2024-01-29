@@ -6,6 +6,10 @@ namespace Notifications.Infrastructure.Persistence.Configurations;
 
 public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="builder"></param>
     public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.HasKey(a => a.Id);
