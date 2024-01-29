@@ -14,6 +14,13 @@ public class CacheService : ICacheService
     private readonly AsyncRetryPolicy _retryPolicy;
     private readonly IServer _server;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="connectionString"></param>
+    /// <param name="prefix"></param>
+    /// <param name="database"></param>
+    /// <param name="asyncRetryPolicy"></param>
     public CacheService(string connectionString, string prefix, int database = 0,
         AsyncRetryPolicy? asyncRetryPolicy = null)
     {
@@ -24,6 +31,11 @@ public class CacheService : ICacheService
         _retryPolicy = asyncRetryPolicy;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public async Task<bool> ExistsAsync(string key)
     {
         if (key is null)
@@ -32,6 +44,10 @@ public class CacheService : ICacheService
         return await RunWithPolicyAsync(async () => await _cache.KeyExistsAsync(GetKeyForRedis(key)));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="bool"></typeparam>
     public async Task<bool> SetAsync<T>(string key, T value, TimeSpan? expiry = null, bool keepTtl = false) where T : class
     {
         if (key is null)
@@ -44,6 +60,14 @@ public class CacheService : ICacheService
         return await RunWithPolicyAsync(async () => await SetStringAsync(key, valueString, expiry, keepTtl));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="expiry"></param>
+    /// <param name="keepTtl"></param>
+    /// <returns></returns>
     public async Task<bool> SetStringAsync(string key, string value, TimeSpan? expiry = null, bool keepTtl = false)
     {
         if (key is null)
@@ -53,6 +77,11 @@ public class CacheService : ICacheService
             await _cache.StringSetAsync(GetKeyForRedis(key), Encoding.UTF8.GetBytes(value), expiry, keepTtl));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public async Task<bool> DeleteAsync(string key)
     {
         if (key is null)
@@ -61,6 +90,11 @@ public class CacheService : ICacheService
         return await RunWithPolicyAsync(async () => await _cache.KeyDeleteAsync(GetKeyForRedis(key)));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="pattern"></param>
+    /// <returns></returns>
     public async Task DeleteByPatternAsync(string pattern)
     {
         if (_server != null && !string.IsNullOrEmpty(pattern))
@@ -74,6 +108,10 @@ public class CacheService : ICacheService
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public async Task<T> GetAsync<T>(string key) where T : class
     {
         if (key is null)
@@ -92,6 +130,11 @@ public class CacheService : ICacheService
         });
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public async Task<string> GetStringAsync(string key)
     {
         if (key is null)
@@ -109,6 +152,12 @@ public class CacheService : ICacheService
         });
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public async Task<bool> ReplaceAsync(string key, object value)
     {
         if (key is null)
@@ -125,7 +174,12 @@ public class CacheService : ICacheService
     }
 
     #region [PRIVATE METHODS]
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="action"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     private async Task<T> RunWithPolicyAsync<T>(Func<Task<T>> action)
     {
         if (_retryPolicy is null)
@@ -136,6 +190,11 @@ public class CacheService : ICacheService
             .ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="action"></param>
+    /// <returns></returns>
     private async Task RunWithPolicyAsync(Func<Task> action)
     {
         if (_retryPolicy is null)

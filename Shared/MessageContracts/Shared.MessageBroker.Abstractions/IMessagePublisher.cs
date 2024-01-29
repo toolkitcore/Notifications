@@ -2,6 +2,10 @@
 
 public interface IMessagePublisher
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     Task Publish<T>(
         T message,
         CancellationToken cancellationToken = default,

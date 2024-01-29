@@ -6,6 +6,11 @@ namespace Shared.Caching.InMemory.Extensions;
 
 public static class CachingExtensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
     public static IServiceCollection AddInMemoryCaching(this IServiceCollection services)
     {
         services.AddMemoryCache();

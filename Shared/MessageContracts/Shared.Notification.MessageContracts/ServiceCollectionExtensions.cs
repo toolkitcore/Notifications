@@ -5,6 +5,11 @@ namespace Shared.Notification.MessageContracts;
 
 public static class ServiceCollectionExtensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
     public static IServiceCollection AddNotificationPublisher(this IServiceCollection services)
     {
         services.AddTransient<INotificationGroupPublisher>(sp =>

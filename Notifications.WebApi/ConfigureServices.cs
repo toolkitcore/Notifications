@@ -25,6 +25,13 @@ namespace Notifications.WebApi;
 
 public static class ConfigureServices
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="env"></param>
+    /// <returns></returns>
     public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
     {
         services.AddHttpContextAccessor();
@@ -53,6 +60,13 @@ public static class ConfigureServices
         return services;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="env"></param>
+    /// <returns></returns>
     private static IServiceCollection AddMessageQueue(this IServiceCollection services,
         IConfiguration configuration,
         IWebHostEnvironment env)
@@ -105,6 +119,13 @@ public static class ConfigureServices
         return services;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="env"></param>
+    /// <returns></returns>
     private static IServiceCollection AddAuthentication(
         this IServiceCollection services,
         IConfiguration configuration,

@@ -6,6 +6,11 @@ namespace Shared.Authorization.Events;
 
 public class JwtBearerDefaultEvent : JwtBearerEvents
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public override Task TokenValidated(TokenValidatedContext context)
     {
         var result = context.SecurityToken as JwtSecurityToken;

@@ -9,6 +9,14 @@ namespace Shared.MessageBroker.RabbitMQ.Extensions;
 
 public static class RabbitMqExtensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="registerConsumer"></param>
+    /// <param name="configConsumer"></param>
+    /// <returns></returns>
     public static IServiceCollection AddMasstransitRabbitMqMessagePublisher(
         this IServiceCollection services,
         IConfiguration configuration,

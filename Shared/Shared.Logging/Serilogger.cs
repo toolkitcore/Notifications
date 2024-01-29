@@ -5,6 +5,10 @@ namespace Shared.Logging;
 
 public static class Serilogger
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public static Action<HostBuilderContext, LoggerConfiguration> Configure =>
         (context, configuration) =>
         {

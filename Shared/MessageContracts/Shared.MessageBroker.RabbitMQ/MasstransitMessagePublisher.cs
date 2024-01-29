@@ -7,11 +7,19 @@ public class MasstransitMessagePublisher : IMessagePublisher
 {
     private readonly IPublishEndpoint _publishEndpoint;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="publishEndpoint"></param>
     public MasstransitMessagePublisher(IPublishEndpoint publishEndpoint)
     {
         _publishEndpoint = publishEndpoint;
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public async Task Publish<T>(T message, CancellationToken cancellationToken = default, Dictionary<string, string>? metaData = null) where T : class
     {
         await _publishEndpoint.Publish(message, ctx =>

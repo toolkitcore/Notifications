@@ -11,10 +11,20 @@ public class MemoryCacheService : ICacheService
 {
     private readonly IMemoryCache _cache;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cache"></param>
     public MemoryCacheService(IMemoryCache cache)
     {
         _cache = cache;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public async Task<bool> ExistsAsync(string key)
     {
         if (key is null)
@@ -25,6 +35,10 @@ public class MemoryCacheService : ICacheService
         return await Task.FromResult(_cache.TryGetValue(key, out _));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="bool"></typeparam>
     public async Task<bool> SetAsync<T>(string key, T value, TimeSpan? expiry = null, bool keepTtl = false) where T : class
     {
         if (key is null)
@@ -42,6 +56,14 @@ public class MemoryCacheService : ICacheService
         return await ExistsAsync(key);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="expiry"></param>
+    /// <param name="keepTtl"></param>
+    /// <returns></returns>
     public async Task<bool> SetStringAsync(string key, string value, TimeSpan? expiry = null, bool keepTtl = false)
     {
         if (key is null)
@@ -66,6 +88,11 @@ public class MemoryCacheService : ICacheService
         return await ExistsAsync(key);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public async Task<bool> DeleteAsync(string key)
     {
         if (key is null)
@@ -78,6 +105,11 @@ public class MemoryCacheService : ICacheService
         return !await ExistsAsync(key);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="pattern"></param>
+    /// <returns></returns>
     public async Task DeleteByPatternAsync(string pattern)
     {
         var allKey = GetAllCacheKeys();
@@ -91,6 +123,10 @@ public class MemoryCacheService : ICacheService
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public async Task<T> GetAsync<T>(string key) where T : class
     {
         if (key is null)
@@ -107,6 +143,11 @@ public class MemoryCacheService : ICacheService
         return JsonConvert.DeserializeObject<T>(resultRaw);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public async Task<string> GetStringAsync(string key)
     {
         if (key is null)
@@ -122,6 +163,12 @@ public class MemoryCacheService : ICacheService
         return await Task.FromResult(result);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public async Task<bool> ReplaceAsync(string key, object value)
     {
         if (key is null)
@@ -143,7 +190,10 @@ public class MemoryCacheService : ICacheService
     }
 
     #region [PRIVATE METHODS]
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     private List<string> GetAllCacheKeys()
     {
         const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;

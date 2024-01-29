@@ -13,12 +13,22 @@ public class ErrorExceptionMiddleware
     private readonly RequestDelegate _next;
     private readonly ILogger<ErrorExceptionMiddleware> _logger;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="next"></param>
+    /// <param name="logger"></param>
     public ErrorExceptionMiddleware(RequestDelegate next, ILogger<ErrorExceptionMiddleware> logger)
     {
         _next = next;
         _logger = logger;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="httpContext"></param>
+    /// <returns></returns>
     public async Task InvokeAsync(HttpContext httpContext)
     {
         try
@@ -33,7 +43,12 @@ public class ErrorExceptionMiddleware
     }
 
     #region [PRIVATE METHOD]
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="exception"></param>
+    /// <returns></returns>
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         ApiResponseBase response = new ApiResponseBase();

@@ -5,6 +5,10 @@ namespace Notifications.WebApi;
 
 public static class ConfigureHosts
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="host"></param>
     public static void AddAppConfigurations(this ConfigureHostBuilder host)
     {
         host.ConfigureAppConfiguration((context, config) =>

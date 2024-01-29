@@ -8,6 +8,12 @@ namespace Shared.Caching.Redis.Extensions;
 
 public static class CachingExtensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
     public static IServiceCollection AddRedisCaching(this IServiceCollection services, IConfiguration configuration)
     {
         var cacheProvider = configuration.GetOptions<CachingOptions>("Redis");

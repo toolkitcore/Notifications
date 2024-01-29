@@ -10,6 +10,13 @@ namespace Shared.Authorization.Extensions;
 
 public static class JwtAuthorizationExtension
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="configureOptions"></param>
+    /// <returns></returns>
     public static IServiceCollection AddJwtBearer(
         this IServiceCollection services,
         IConfiguration configuration,

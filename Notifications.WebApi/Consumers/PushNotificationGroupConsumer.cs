@@ -11,12 +11,22 @@ public class PushNotificationGroupConsumer : IConsumer<PushNotificationGroupMess
     
     private readonly ILogger<PushNotificationGroupConsumer> _logger;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="mediator"></param>
+    /// <param name="logger"></param>
     public PushNotificationGroupConsumer(IMediator mediator, ILogger<PushNotificationGroupConsumer> logger)
     {
         _mediator = mediator;
         _logger = logger;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public async Task Consume(ConsumeContext<PushNotificationGroupMessage> context)
     {
         var message = context.Message;
